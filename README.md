@@ -1,24 +1,27 @@
-# nesto Front-End Coding Challenge
+# Casey's Front-End Coding Challenge Submission
 
-It's mortgage season! Your challenge is to build a microsite that empowers clients to get the lowest rate on first try!
+It's mortgage season! My challenge is to build a microsite that empowers clients to get the lowest rate on first try!
 
-## Functional requirements
+# Development Setup
 
-Design and implement a single page app that allows a user to select a mortgage product, create an application for that product, and update the application with their contact information.
+```bash
+# Install Dependencies
+pnpm install
 
-**Screen 1**:
-There are two types of mortgages, **Variable** and **Fixed**. The "**best** mortgage product" is the product with the lowest `bestRate` value (see `type Application` below)
+# Run Development Server
+pnpm run dev
+```
 
-- display two lists of one or more of the **best** mortgage products(s), one list for each type of mortgage
-- when the user selects a product, create a new application, and then route the user to the next screen
+# About the Stack
 
-**Screen 2**:
-At this point, application has already been created, now the user needs to be able to update the application with their contact information
+- Why did I chose to use TailwindCSS instead of styled-components?
 
-- display a contact info form where the user can add their first name, last name, email, and phone number
-- when the user saves their information, update the application with correct data
+# Workflow and tools used for this project
 
-## Must have
+- What I hand wrote
+- Generative AI tools: Cursor and Claude Code
+
+## App Must have
 
 - This test has to be done in React JS
 - Please use the **wireframe** as a guideline and we encourage you to use your creativity and your styling skills to create the design
@@ -31,29 +34,17 @@ At this point, application has already been created, now the user needs to be ab
 - Create a List View for the existing applications with option to EDIT an existing application (only show the applications with valid data)
 - Error handling
 
-### Impress us
+### Should also include
 
 - Localization: support for multiple languages (English, French, ...)
 - Tests (Unit, component ...)
 - Use storybook to showcase your components
 - Feel free to deploy the microsite to to an host of your choice i.e. [Vercel](https://vercel.com/docs), [Netlifty](https://www.netlify.com/with/react/), [Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
 
-### Remarks
+### Additional Remarks
 
 - You can setup your microsite any way you like; we're are using React JS, Styled-components
 - Please don't use components frameworks (ie: MATERIAL-UI), we would like to see your CSS skills
-
-### Things that are important to us
-
-- Code quality, maintainability and readability
-- Attention to the User Experience (think: how intuitive is my app?)
-
-### Things you'll not be evaluated on
-
-- Features we didn't list in this README
-- The quantity of code you write
-
-# Documentation
 
 ## Supporting API
 
