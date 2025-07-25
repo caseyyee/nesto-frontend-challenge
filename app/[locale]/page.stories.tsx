@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/nextjs";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { expect, within } from "@storybook/test";
 import { TestI18nProvider } from "@/test-utils";
 import HomePage from "./page";
 
@@ -34,5 +35,19 @@ export const Default: Story = {
           "Default state of the home page with heading and navigation link.",
       },
     },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    
+    // Test that the page renders with correct heading
+    const heading = canvas.getByRole("heading", { level: 1 });
+    await expect(heading).toBeInTheDocument();
+    await expect(heading).toHaveTextContent("Home");
+    
+    // Test that the about link is present and has correct text
+    const aboutLink = canvas.getByRole("link");
+    await expect(aboutLink).toBeInTheDocument();
+    await expect(aboutLink).toHaveTextContent("Go to the about page");
+    await expect(aboutLink).toHaveAttribute("href", "/en/about");
   },
 };
