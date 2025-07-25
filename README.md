@@ -2,7 +2,23 @@
 
 It's mortgage season! My challenge is to build a microsite that empowers clients to get the lowest rate on first try!
 
-# Development Setup
+# Local Development Setup
+
+## 1. Environment variables
+
+1. Copy example environment to local
+
+```bash
+cp .env.example .env.local
+```
+
+2. Specify environment variables
+
+```
+NEXT_PUBLIC_NESTO_API="nesto-api-endpoint"
+```
+
+## 2. Install dependencies
 
 ```bash
 # Install Dependencies
@@ -17,6 +33,31 @@ pnpm run dev
 - Why did I chose to use TailwindCSS instead of styled-components?
 - Component testing with vitest, `*.test.*` files.
 - Storybook for visual testing and component reference, `*.stories.*` files.
+- Uses React-Query to manage API usage and Zod to validate data.
+
+# Issues found
+
+- Inconsistent API response compared to what was documented:
+
+  1. family:
+
+  - Doc: "VALUE_FLEX" (only)
+  - API: "VALUE_FLEX" | "STANDARD"
+
+  2. prepaymentOption:
+
+  - Doc: "STANDARD" | "HELOC"
+  - API: "STANDARD" | "ENHANCED"
+
+  3. fixedPenaltySpread:
+
+  - Doc: string (generic)
+  - API: "SMALL_PENALTY" | "BANK_PENALTY" (specific enums)
+
+  4. lenderType:
+
+  - Doc: string (generic)
+  - API: "MONOLINE" | "BIG_BANK" (specific enums)
 
 # Workflow and tools used for this project
 
