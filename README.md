@@ -15,6 +15,7 @@ pnpm run dev
 # About the Stack
 
 - Why did I chose to use TailwindCSS instead of styled-components?
+- Testing: Vitest
 
 # Workflow and tools used for this project
 
@@ -23,28 +24,27 @@ pnpm run dev
 
 ## App Must have
 
-- This test has to be done in React JS
-- Please use the **wireframe** as a guideline and we encourage you to use your creativity and your styling skills to create the design
-- Provide the best UX/UI possible.
-- Use a Visual Indicator to show when the application is saved or updated
-- Responsive design
-- Keep your code simple, clean and well-organized.
-- Don't hesitate to come back to us with any questions along the way. We prefer that you ask questions, rather than assuming or misinterpreting requirements.
-- Provide a README file with the information about your app (install, run ...)
-- Create a List View for the existing applications with option to EDIT an existing application (only show the applications with valid data)
-- Error handling
+- [x] This test has to be done in React JS
+- [x] Please use the **wireframe** as a guideline and we encourage you to use your creativity and your styling skills to create the design
+- [x] Provide the best UX/UI possible.
+- [ ] Use a Visual Indicator to show when the application is saved or updated
+- [ ] Responsive design
+- [x] Keep your code simple, clean and well-organized.
+- [ ] Don't hesitate to come back to us with any questions along the way. We prefer that you ask questions, rather than assuming or misinterpreting requirements.
+- [ ] Provide a README file with the information about your app (install, run ...)
+- [ ] Create a List View for the existing applications with option to EDIT an existing application (only show the applications with valid data)
+- [ ] Error handling
 
 ### Should also include
 
-- Localization: support for multiple languages (English, French, ...)
-- Tests (Unit, component ...)
-- Use storybook to showcase your components
-- Feel free to deploy the microsite to to an host of your choice i.e. [Vercel](https://vercel.com/docs), [Netlifty](https://www.netlify.com/with/react/), [Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
+- [x] Localization: support for multiple languages (English, French, ...)
+- [x] Tests (Unit, component ...)
+- [x] Use storybook to showcase your components
+- [ ] Feel free to deploy the microsite to to an host of your choice i.e. [Vercel](https://vercel.com/docs), [Netlifty](https://www.netlify.com/with/react/), [Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
 
 ### Additional Remarks
 
 - You can setup your microsite any way you like; we're are using React JS, Styled-components
-- Please don't use components frameworks (ie: MATERIAL-UI), we would like to see your CSS skills
 
 ## Supporting API
 
