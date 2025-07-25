@@ -15,12 +15,15 @@ pnpm run dev
 # About the Stack
 
 - Why did I chose to use TailwindCSS instead of styled-components?
-- Testing: Vitest
+- Component testing with vitest, `*.test.*` files.
+- Storybook for visual testing and component reference, `*.stories.*` files.
 
 # Workflow and tools used for this project
 
-- What I hand wrote
-- Generative AI tools: Cursor and Claude Code
+- What I used AI for
+  - Troubleshoot storybook configuration
+  - Double check my work
+- AI tools: Cursor and Claude Code
 
 ## App Must have
 

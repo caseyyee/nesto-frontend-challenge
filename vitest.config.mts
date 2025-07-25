@@ -7,5 +7,7 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     setupFiles: ["./vitest.setup.ts"],
+    // Exclude story files from regular test runs
+    exclude: ["**/*.stories.@(js|jsx|ts|tsx)", "node_modules/**"],
   },
 });
