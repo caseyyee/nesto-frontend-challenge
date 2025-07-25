@@ -4,12 +4,21 @@ import { Suspense } from "react";
 import { fetchProductsServer } from "@/lib/server-api";
 import { getBestProducts } from "@/lib/product-utils";
 import ProductsLoadingSkeleton from "@/components/ProductsLoadingSkeleton";
+import Image from "next/image";
 
 export default async function HomePage() {
   const t = await getTranslations("HomePage");
 
   return (
     <div>
+      <Link href="https://www.nesto.ca/" target="_blank">
+        <Image
+          src={`/logo-nesto-en.svg`}
+          alt={`Logo`}
+          width={231}
+          height={101}
+        />
+      </Link>
       <h1>{t("title")}</h1>
       <Link href="/about">{t("about")}</Link>
 

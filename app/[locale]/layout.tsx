@@ -2,7 +2,15 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { QueryProvider } from "@/providers/QueryProvider";
+import { Montserrat } from "next/font/google";
+import clsx from "clsx";
 import "../globals.css";
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-montserrat",
+});
 
 export default async function LocaleLayout({
   children,
@@ -20,7 +28,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
-      <body>
+      <body className={clsx(montserrat.variable, "font-montserrat")}>
         <QueryProvider>
           <NextIntlClientProvider>{children}</NextIntlClientProvider>
         </QueryProvider>

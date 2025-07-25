@@ -1,7 +1,7 @@
 import { ProductsSchema } from "@/types/nesto";
 import { DEFAULT_HEADERS } from "@/lib/constants";
 
-const API_BASE_URL = process.env.NESTO_API;
+const API_BASE_URL = process.env.NEXT_PUBLIC_NESTO_API;
 
 export async function fetchProductsServer() {
   try {
