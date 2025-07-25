@@ -1,29 +1,67 @@
-"use client";
-
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { useProducts } from "@/hooks/useProducts";
-import { useEffect } from "react";
+import { Suspense } from "react";
+import { fetchProductsServer } from "@/lib/server-api";
+import { getBestProducts } from "@/lib/product-utils";
+import ProductsLoadingSkeleton from "@/components/ProductsLoadingSkeleton";
 
-export default function HomePage() {
-  const t = useTranslations("HomePage");
-  const { data: products, isLoading, error } = useProducts();
-
-  useEffect(() => {
-    if (products) {
-      console.log("Products:", products);
-    }
-  }, [products]);
-
-  if (isLoading) return <div>Loading products...</div>;
-
-  if (error) return <div>Error loading products: {error.message}</div>;
+export default async function HomePage() {
+  const t = await getTranslations("HomePage");
 
   return (
     <div>
       <h1>{t("title")}</h1>
       <Link href="/about">{t("about")}</Link>
-      <p>Found {products?.length} products (check console for details)</p>
+
+      <Suspense fallback={<ProductsLoadingSkeleton />}>
+        <ProductsServer />
+      </Suspense>
     </div>
   );
+}
+
+async function ProductsServer() {
+  try {
+    const products = await fetchProductsServer();
+    const { variable, fixed } = getBestProducts(products);
+
+    return (
+      <div>
+        <p>
+          Found {products.length} products ({variable.length} variable,{" "}
+          {fixed.length} fixed)
+        </p>
+        <div>
+          <h2>Variable Rate Products</h2>
+          {variable.map((product) => (
+            <div key={product.id} className="border p-4 mb-2">
+              <h3>{product.name}</h3>
+              <p>Rate: {product.bestRate}%</p>
+              <p>Term: {product.term}</p>
+            </div>
+          ))}
+        </div>
+        <div>
+          <h2>Fixed Rate Products</h2>
+          {fixed.map((product) => (
+            <div key={product.id} className="border p-4 mb-2">
+              <h3>{product.name}</h3>
+              <p>Rate: {product.bestRate}%</p>
+              <p>Term: {product.term}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  } catch (error) {
+    console.error("Error loading products:", error);
+    return (
+      <div className="text-red-600">
+        <p>Error loading products. Please try again later.</p>
+        <p className="text-sm">
+          {error instanceof Error ? error.message : "Unknown error"}
+        </p>
+      </div>
+    );
+  }
 }

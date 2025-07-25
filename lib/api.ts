@@ -1,17 +1,10 @@
-import { 
-  Product, 
-  Application, 
+import { DEFAULT_HEADERS } from "@/lib/constants";
+import {
+  Application,
+  ApplicationSchema,
+  ApplicationsSchema,
   CreateApplication,
-  ProductsSchema, 
-  ApplicationsSchema, 
-  ApplicationSchema 
-} from '@/types/nesto';
-
-const DEFAULT_HEADERS = {
-  Accept: "application/json",
-  "Content-Type": "application/json",
-  "X-Nesto-Candidat": "Anonymous User",
-};
+} from "@/types/nesto";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_NESTO_API;
 
@@ -20,20 +13,6 @@ if (!API_BASE_URL) {
 }
 
 export const api = {
-  async getProducts(): Promise<Product[]> {
-    const response = await fetch(`${API_BASE_URL}/products`, {
-      method: "GET",
-      headers: DEFAULT_HEADERS,
-    });
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch products: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    return ProductsSchema.parse(data);
-  },
-
   async getApplications(): Promise<Application[]> {
     const response = await fetch(`${API_BASE_URL}/applications`, {
       method: "GET",
@@ -77,7 +56,10 @@ export const api = {
     return ApplicationSchema.parse(responseData);
   },
 
-  async updateApplication(id: string, data: Partial<Application>): Promise<Application> {
+  async updateApplication(
+    id: string,
+    data: Partial<Application>,
+  ): Promise<Application> {
     const response = await fetch(`${API_BASE_URL}/applications/${id}`, {
       method: "PUT",
       headers: DEFAULT_HEADERS,
