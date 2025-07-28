@@ -31,6 +31,7 @@ pnpm run dev
 # About the Stack
 
 - Why did I chose to use TailwindCSS instead of styled-components?
+  - Class variant Authority to manage variants
 - Component testing with vitest, `*.test.*` files.
 - Storybook for visual testing and component reference, `*.stories.*` files.
 - Uses React-Query to manage API usage and Zod to validate data.
@@ -65,6 +66,13 @@ pnpm run dev
   - Troubleshoot storybook configuration
   - Double check my work
 - AI tools: Cursor and Claude Code
+
+### ToDo
+
+- [ ] TestI18nProvider.tsx
+- [ ] review product-utils.test.ts, cross check mock data
+- [ ] screenreader accessilbility (language toggle)
+- [ ] dark mode?
 
 ## App Must have
 

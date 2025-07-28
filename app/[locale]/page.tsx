@@ -4,28 +4,42 @@ import { Suspense } from "react";
 import { fetchProductsServer } from "@/lib/server-api";
 import { getBestProducts } from "@/lib/product-utils";
 import ProductsLoadingSkeleton from "@/components/ProductsLoadingSkeleton";
+import { LanguageToggle } from "@/components/LanguageToggle";
+import { ProductList } from "@/components/ProductList";
 import Image from "next/image";
+import { Heading } from "@/components/Heading";
 
 export default async function HomePage() {
   const t = await getTranslations("HomePage");
 
   return (
-    <div>
-      <Link href="https://www.nesto.ca/" target="_blank">
-        <Image
-          src={`/logo-nesto-en.svg`}
-          alt={`Logo`}
-          width={231}
-          height={101}
-        />
-      </Link>
-      <h1>{t("title")}</h1>
-      <Link href="/about">{t("about")}</Link>
+    <>
+      <header className="flex items-center justify-between mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <nav className="p-2">
+          <Link href="https://www.nesto.ca/" target="_blank">
+            <Image
+              src={`/logo-nesto-en.svg`}
+              alt={t("logo")}
+              width={121}
+              height={52}
+            />
+          </Link>
+        </nav>
+        <div className="p-2">
+          <LanguageToggle />
+        </div>
+      </header>
 
-      <Suspense fallback={<ProductsLoadingSkeleton />}>
-        <ProductsServer />
-      </Suspense>
-    </div>
+      <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <Heading level={1} className="text-center my-8">
+          {t("title")}
+        </Heading>
+
+        <Suspense fallback={<ProductsLoadingSkeleton />}>
+          <ProductsServer />
+        </Suspense>
+      </div>
+    </>
   );
 }
 
@@ -34,34 +48,7 @@ async function ProductsServer() {
     const products = await fetchProductsServer();
     const { variable, fixed } = getBestProducts(products);
 
-    return (
-      <div>
-        <p>
-          Found {products.length} products ({variable.length} variable,{" "}
-          {fixed.length} fixed)
-        </p>
-        <div>
-          <h2>Variable Rate Products</h2>
-          {variable.map((product) => (
-            <div key={product.id} className="border p-4 mb-2">
-              <h3>{product.name}</h3>
-              <p>Rate: {product.bestRate}%</p>
-              <p>Term: {product.term}</p>
-            </div>
-          ))}
-        </div>
-        <div>
-          <h2>Fixed Rate Products</h2>
-          {fixed.map((product) => (
-            <div key={product.id} className="border p-4 mb-2">
-              <h3>{product.name}</h3>
-              <p>Rate: {product.bestRate}%</p>
-              <p>Term: {product.term}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
+    return <ProductList variable={variable} fixed={fixed} />;
   } catch (error) {
     console.error("Error loading products:", error);
     return (
