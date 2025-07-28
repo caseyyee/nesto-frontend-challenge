@@ -15,7 +15,7 @@ export default async function HomePage() {
   return (
     <>
       <header className="flex items-center justify-between mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <nav className="p-2">
+        <nav className="p-4">
           <Link href="https://www.nesto.ca/" target="_blank">
             <Image
               src={`/logo-nesto-en.svg`}
@@ -25,13 +25,13 @@ export default async function HomePage() {
             />
           </Link>
         </nav>
-        <div className="p-2">
+        <div className="p-4">
           <LanguageToggle />
         </div>
       </header>
 
       <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <Heading level={1} className="text-center my-8">
+        <Heading level={1} className="text-center my-8 max-w-2xl mx-auto">
           {t("title")}
         </Heading>
 

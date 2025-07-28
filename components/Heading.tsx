@@ -4,9 +4,9 @@ import { cva, type VariantProps } from "class-variance-authority";
 const headingStyles = cva("", {
   variants: {
     variant: {
-      hero: "font-bold text-3xl md:text-5xl lg:text-7xl",
+      hero: "font-bold text-4xl md:text-5xl lg:text-7xl",
       title: "font-bold text-xl md:text-2xl lg:text-4xl",
-      subtitle: "text-lg md:text-xl lg:text-2xl",
+      subtitle: "font-bold text-lg md:text-xl lg:text-2xl",
       body: "text-base md:text-lg",
     },
   },

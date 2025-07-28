@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, HTMLAttributes } from "react";
-import { Heading } from "./Heading";
-import { Text } from "./Text";
-import { Button } from "./Button";
 import type { Product } from "@/types/nesto";
 import { clsx } from "clsx";
+import { HTMLAttributes, useState } from "react";
+import { Button } from "./Button";
+import { Heading } from "./Heading";
+import { Text } from "./Text";
 
 interface ProductListProps {
   variable: Product[];
@@ -32,23 +32,51 @@ function ProductCard({ product, className, ...rest }: ProductCardProps) {
     <div
       key={product.id}
       className={clsx(
-        "p-4 mb-2 rounded bg-baby-blue flex flex-col items-center w-full",
+        "bg-baby-blue p-4 mb-2 rounded-4xl flex flex-col items-center w-full border-navy-blue border",
         className,
       )}
       {...rest}
     >
+      <Text>{termLabels[product.term]}</Text>
       <div className="flex">
-        <Text size="6xl" className="font-medium">
+        <Text size={"6xl"} className={clsx("font-bold")}>
           {product.bestRate}
         </Text>
-        <Text size="2xl" className="font-bold">
+        <Text size={"2xl"} className="font-bold">
           %
         </Text>
       </div>
-      <Text>{termLabels[product.term]}</Text>
+
       <Text>{product.lenderName}</Text>
-      <Heading level={3}>{product.name}</Heading>
-      <Button className="mt-4">Select this Product</Button>
+      <Text>{product.name}</Text>
+      <Button className="mt-4" variant={"primary"}>
+        Select this Product
+      </Button>
+    </div>
+  );
+}
+
+function ProductCardItem({ product, className, ...rest }: ProductCardProps) {
+  return (
+    <div
+      key={product.id}
+      className={clsx("p-4 flex flex-col items-center w-full", className)}
+      {...rest}
+    >
+      <Text>{termLabels[product.term]}</Text>
+      <div className="flex">
+        <Text size={"5xl"} className={"font-bold"}>
+          {product.bestRate}
+        </Text>
+        <Text size={"xl"} className="font-bold">
+          %
+        </Text>
+      </div>
+      <Text>{product.lenderName}</Text>
+      <Text>{product.name}</Text>
+      <Button className="mt-4" variant="secondary" size="base">
+        Select this Product
+      </Button>
     </div>
   );
 }
@@ -61,52 +89,48 @@ export function ProductList({ variable, fixed }: ProductListProps) {
   const [bestFixed, ...restFixed] = fixed;
 
   return (
-    <div className="flex gap-4 justify-center">
-      <div className="border p-4 rounded-lg flex flex-col gap-4 items-center">
-        <Heading level={2} className="mb-2">
-          Best Variable
-        </Heading>
-
+    <div className="grid grid-cols-1 md:grid-cols-2 md:w-5/6 mx-auto">
+      <div className="p-4 rounded-lg flex flex-col gap-4 items-center">
+        <Heading level={2}>Best Variable</Heading>
         {bestVariable && <ProductCard product={bestVariable} />}
-
         {restVariable.length > 0 && showMoreVariable ? (
           <>
-            {restVariable.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+            <Heading level={3}>Variable Rates</Heading>
+            <div className="w-full grid grid-cols-1 divide-y divide-navy-blue border-navy-blue border rounded-4xl bg-baby-blue">
+              {restVariable.map((product) => (
+                <ProductCardItem key={product.id} product={product} />
+              ))}
+            </div>
           </>
         ) : (
           <Button
             onClick={() => setShowMoreVariable(!showMoreVariable)}
-            variant="secondary"
+            variant="tertiary"
           >
-            {restVariable.length} more rate options
+            {restVariable.length} more variable
           </Button>
         )}
       </div>
 
-      <div className="border p-4 rounded-lg flex flex-col gap-4 items-center">
+      <div className="p-4 rounded-lg flex flex-col gap-4 items-center">
         <Heading level={2}>Best Fixed</Heading>
-
         {bestFixed && <ProductCard product={bestFixed} />}
-
-        {restFixed.length > 0 && (
+        {restFixed.length > 0 && showMoreFixed ? (
           <>
-            {showMoreFixed ? (
-              <div className="space-y-2">
-                {restFixed.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
-            ) : (
-              <Button
-                onClick={() => setShowMoreFixed(!showMoreFixed)}
-                variant="secondary"
-              >
-                {restFixed.length} more rate options
-              </Button>
-            )}
+            <Heading level={3}>Fixed Rates</Heading>
+            <div className="w-full grid grid-cols-1 divide-y divide-navy-blue border-navy-blue border rounded-4xl bg-baby-blue">
+              {restFixed.map((product) => (
+                <ProductCardItem key={product.id} product={product} />
+              ))}
+            </div>
           </>
+        ) : (
+          <Button
+            onClick={() => setShowMoreFixed(!showMoreFixed)}
+            variant="tertiary"
+          >
+            {restFixed.length} more fixed
+          </Button>
         )}
       </div>
     </div>
