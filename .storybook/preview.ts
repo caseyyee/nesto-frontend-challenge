@@ -1,4 +1,6 @@
 import type { Preview } from "@storybook/nextjs-vite";
+import { createElement } from "react";
+import { I18nDecorator } from "./I18nDecorator";
 import "../app/globals.css";
 
 const preview: Preview = {
@@ -17,6 +19,11 @@ const preview: Preview = {
       test: "todo",
     },
   },
+  decorators: [
+    (Story) => {
+      return createElement(I18nDecorator, { children: createElement(Story) });
+    },
+  ],
 };
 
 export default preview;

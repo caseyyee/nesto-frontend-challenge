@@ -3,8 +3,15 @@
     "logo": "nesto.ca | Best Mortgages  Rates, Period.",
     "title": "Find the Best Mortgage Rates in Canada"
   },
-  "ApplicationPage": {
-    "title": "Application",
-    "home": "Go to home page"
+  "ProductList": {
+    "bestVariable": "Best Variable",
+    "bestFixed": "Best Fixed",
+    "variableRates": "Variable Rates",
+    "fixedRates": "Fixed Rates",
+    "moreVariable": "{count} more variable",
+    "moreFixed": "{count} more fixed",
+    "createApplicationError": "Failed to create application:",
+    "selectProduct": "Select this Product",
+    "creatingApplication": "Creating Application..."
   }
 }

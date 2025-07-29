@@ -1,4 +1,5 @@
 import { clsx } from "clsx";
+import { useTranslations } from "next-intl";
 import { Button } from "./Button";
 import { termLabels, type ProductCardProps } from "./ProductCard";
 import { Text } from "./Text";
@@ -13,6 +14,7 @@ export function ProductListItem({
   onSelectProduct: (productId: number) => void;
   isLoading?: boolean;
 }) {
+  const t = useTranslations("ProductList");
   return (
     <div
       key={product.id}
@@ -37,7 +39,7 @@ export function ProductListItem({
         onClick={() => onSelectProduct(product.id)}
         disabled={isLoading}
       >
-        {isLoading ? "Creating Application..." : "Select this Product"}
+        {isLoading ? t("creatingApplication") : t("selectProduct")}
       </Button>
     </div>
   );

@@ -1,6 +1,7 @@
 import type { Product } from "@/types/nesto";
 import { clsx } from "clsx";
 import { HTMLAttributes } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "./Button";
 import { Text } from "./Text";
 
@@ -29,6 +30,7 @@ export function ProductCard({
   onSelectProduct?: (productId: number) => void;
   isLoading?: boolean;
 }) {
+  const t = useTranslations("ProductList");
   return (
     <div
       key={product.id}
@@ -57,7 +59,7 @@ export function ProductCard({
           onClick={() => onSelectProduct(product.id)}
           disabled={isLoading}
         >
-          {isLoading ? "Creating Application..." : "Select this Product"}
+          {isLoading ? t("creatingApplication") : t("selectProduct")}
         </Button>
       )}
     </div>

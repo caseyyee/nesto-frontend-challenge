@@ -3,8 +3,15 @@
     "logo": "Find the Best Mortgage Rates in Canada",
     "title": "Taux hypothécaires"
   },
-  "AboutPage": {
-    "title": "About",
-    "home": "Go to home page"
+  "ProductList": {
+    "bestVariable": "Meilleur Variable",
+    "bestFixed": "Meilleur Fixe",
+    "variableRates": "Taux Variables",
+    "fixedRates": "Taux Fixes",
+    "moreVariable": "{count} variables de plus",
+    "moreFixed": "{count} fixes de plus",
+    "createApplicationError": "Échec de création de l'application:",
+    "selectProduct": "Sélectionner ce produit",
+    "creatingApplication": "Création de l'application..."
   }
 }
