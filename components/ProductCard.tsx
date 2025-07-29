@@ -7,6 +7,7 @@ import { Text } from "./Text";
 import { NestoLogo } from "./NestoLogo";
 
 export interface ProductCardProps extends HTMLAttributes<HTMLDivElement> {
+  variant?: "base" | "best";
   product: Product;
   onSelectProduct?: (productId: number) => void;
   isLoading?: boolean;
@@ -33,19 +34,16 @@ export function ProductCard({
   className,
   onSelectProduct,
   isLoading,
+  variant,
   ...rest
-}: ProductCardProps & {
-  onSelectProduct?: (productId: number) => void;
-  isLoading?: boolean;
-}) {
+}: ProductCardProps) {
   const t = useTranslations("ProductList");
 
   return (
     <div
       key={product.id}
       className={clsx(
-        // "p-6 rounded-4xl flex flex-col items-center w-full bg-white/60 backdrop-blur-lg shadow-lg",
-        "p-6 rounded-3xl flex flex-col items-center w-full bg-white",
+        "flex flex-col items-center w-full bg-white p-6",
         className,
       )}
       {...rest}
@@ -55,10 +53,13 @@ export function ProductCard({
       </Text>
 
       <div className="flex">
-        <Text size={"6xl"} className={clsx("font-extrabold")}>
+        <Text
+          size={variant === "best" ? "7xl" : "6xl"}
+          className={clsx("font-extrabold")}
+        >
           {product.bestRate}
         </Text>
-        <Text size={"2xl"} className="font-bold">
+        <Text size={variant === "best" ? "3xl" : "2xl"} className="font-bold">
           %
         </Text>
       </div>
@@ -76,7 +77,7 @@ export function ProductCard({
       {onSelectProduct && (
         <Button
           className="mt-5"
-          variant="primary"
+          variant={variant === "best" ? "primary" : "secondary"}
           onClick={() => onSelectProduct(product.id)}
           disabled={isLoading}
         >

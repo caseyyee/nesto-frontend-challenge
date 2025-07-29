@@ -19,6 +19,10 @@ const meta: Meta<typeof ProductCard> = {
     isLoading: {
       control: { type: "boolean" },
     },
+    variant: {
+      control: { type: "select" },
+      options: ["base", "best"],
+    },
   },
 };
 
@@ -29,6 +33,14 @@ export const Default: Story = {
   args: {
     product: mockProduct,
     onSelectProduct: undefined,
+  },
+};
+
+export const BestVariant: Story = {
+  args: {
+    product: mockProduct,
+    onSelectProduct: undefined,
+    variant: "best",
   },
 };
 

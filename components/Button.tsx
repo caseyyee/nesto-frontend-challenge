@@ -3,15 +3,15 @@ import { cva, type VariantProps } from "class-variance-authority";
 import clsx from "clsx";
 
 const buttonStyles = cva(
-  "inline-flex items-center justify-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:bg-baby-blue disabled:text-navy-blue/50 disabled:cursor-not-allowed whitespace-nowrap",
+  "inline-flex items-center justify-center rounded-full border-2 border-transparent whitespace-nowrap transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:border-navy-blue/40 disabled:bg-baby-blue disabled:text-navy-blue/40",
   {
     variants: {
       variant: {
         primary:
-          "px-8 py-3 bg-yellow text-xl font-bold text-navy-blue hover:bg-orange hover:text-white focus:ring-navy-blue",
+          "bg-yellow px-8 py-3 text-xl font-bold text-navy-blue hover:bg-orange hover:text-white focus:ring-navy-blue",
         secondary:
-          "font-bold bg-navy-blue text-white hover:bg-orange hover:text-white focus:ring-navy-blue",
-        tertiary: "font-bold text-navy-blue hover:text-orange underline",
+          "bg-navy-blue font-bold text-white hover:bg-orange hover:text-white focus:ring-navy-blue",
+        tertiary: "font-bold text-navy-blue underline hover:text-orange",
       },
       size: {
         base: "px-4 py-2 text-base",

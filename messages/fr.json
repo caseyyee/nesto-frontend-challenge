@@ -1,13 +1,14 @@
 {
   "HomePage": {
-    "logo": "Find the Best Mortgage Rates in Canada",
-    "title": "Taux hypothécaires"
+    "logo": "nesto.ca | Meilleurs taux hypothécaires, point final.",
+    "title": "Trouvez les meilleurs taux hypothécaires au Canada"
   },
   "ApplicationPage": {
     "title": "Demande",
     "home": "Aller à la page d'accueil",
     "errorLoading": "Erreur lors du chargement de la demande:",
-    "unknownError": "Erreur inconnue"
+    "unknownError": "Erreur inconnue",
+    "selectedProduct": "Produit sélectionné"
   },
   "ApplicationForm": {
     "title": "Informations du demandeur",
@@ -17,9 +18,9 @@
     "email": "Courriel",
     "phone": "Téléphone",
     "saving": "Enregistrement...",
-    "saveButton": "Enregistrer les informations",
-    "successMessage": "Informations du demandeur enregistrées avec succès!",
-    "errorMessage": "Échec de l'enregistrement des informations. Veuillez réessayer.",
+    "saveButton": "Enregistrer la demande",
+    "successMessage": "Demande enregistrée!",
+    "errorMessage": "Échec de l'enregistrement. Veuillez réessayer.",
     "updateError": "Échec de mise à jour de la demande:",
     "validation": {
       "firstNameRequired": "Le prénom est requis",
@@ -34,7 +35,7 @@
     }
   },
   "ApplicationSelector": {
-    "label": "Choisir une autre demande",
+    "label": "Choisir une demande",
     "noApplications": "Aucune demande disponible",
     "selectPrompt": "Sélectionner une demande",
     "newApplication": "Nouvelle demande {number}"

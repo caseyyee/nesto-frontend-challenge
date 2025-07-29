@@ -30,7 +30,7 @@ export function BestProductCard({
         </Heading>
         {endIcon && <span>{endIcon}</span>}
       </div>
-      {children}
+      <div className="rounded-3xl border overflow-hidden">{children}</div>
     </div>
   );
 }

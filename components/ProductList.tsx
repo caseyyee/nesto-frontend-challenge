@@ -11,7 +11,6 @@ import { useState } from "react";
 import { BestProductCard } from "./BestProductCard";
 import { Button } from "./Button";
 import { ProductCard } from "./ProductCard";
-import { ProductListItem } from "./ProductListItem";
 import { ProductListSection } from "./ProductListSection";
 
 interface ProductListProps {
@@ -51,6 +50,7 @@ export function ProductList({ variable, fixed }: ProductListProps) {
             startIcon={<StarIcon className="w-6 h-6 text-white" />}
           >
             <ProductCard
+              variant="best"
               product={bestVariable}
               onSelectProduct={handleSelectProduct}
               isLoading={createApplicationMutation.isPending}
@@ -61,7 +61,7 @@ export function ProductList({ variable, fixed }: ProductListProps) {
         {restVariable.length > 0 && showMoreVariable && (
           <ProductListSection title={t("variableRates")}>
             {restVariable.map((product) => (
-              <ProductListItem
+              <ProductCard
                 key={product.id}
                 product={product}
                 onSelectProduct={handleSelectProduct}
@@ -89,6 +89,7 @@ export function ProductList({ variable, fixed }: ProductListProps) {
             startIcon={<StarIcon className="w-6 h-6 text-white" />}
           >
             <ProductCard
+              variant="best"
               product={bestFixed}
               onSelectProduct={handleSelectProduct}
               isLoading={createApplicationMutation.isPending}
@@ -99,7 +100,7 @@ export function ProductList({ variable, fixed }: ProductListProps) {
         {restFixed.length > 0 && showMoreFixed && (
           <ProductListSection title={t("fixedRates")}>
             {restFixed.map((product) => (
-              <ProductListItem
+              <ProductCard
                 key={product.id}
                 product={product}
                 onSelectProduct={handleSelectProduct}

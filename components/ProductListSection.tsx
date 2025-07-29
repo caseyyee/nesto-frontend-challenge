@@ -18,7 +18,7 @@ export function ProductListSection({
       >
         {title}
       </Heading>
-      <div className="w-full grid grid-cols-1 divide-y divide-navy-blue border-navy-blue border-2 rounded-3xl bg-white backdrop-blur-lg shadow-lg">
+      <div className="w-full grid grid-cols-1 divide-y divide-navy-blue border-navy-blue border-2 rounded-3xl backdrop-blur-lg shadow-lg overflow-hidden">
         {children}
       </div>
     </div>

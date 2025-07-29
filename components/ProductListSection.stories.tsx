@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ProductListSection } from "@/components/ProductListSection";
-import { ProductListItem } from "@/components/ProductListItem";
+import { ProductCard } from "@/components/ProductCard";
 import { mockProduct } from "@/test-utils/mocks/products";
 
 const meta: Meta<typeof ProductListSection> = {
@@ -25,7 +25,7 @@ export const Default: Story = {
     title: "Variable Rates",
     children: (
       <>
-        <ProductListItem
+        <ProductCard
           product={{
             ...mockProduct,
             id: 1,
@@ -35,7 +35,7 @@ export const Default: Story = {
           }}
           onSelectProduct={(id) => console.log("Selected:", id)}
         />
-        <ProductListItem
+        <ProductCard
           product={{
             ...mockProduct,
             id: 2,
@@ -45,7 +45,7 @@ export const Default: Story = {
           }}
           onSelectProduct={(id) => console.log("Selected:", id)}
         />
-        <ProductListItem
+        <ProductCard
           product={{
             ...mockProduct,
             id: 3,
@@ -64,7 +64,7 @@ export const SingleItem: Story = {
   args: {
     title: "Single Rate",
     children: (
-      <ProductListItem
+      <ProductCard
         product={{
           ...mockProduct,
           bestRate: 3.25,
@@ -82,7 +82,7 @@ export const LoadingState: Story = {
     title: "Loading Rates",
     children: (
       <>
-        <ProductListItem
+        <ProductCard
           product={{
             ...mockProduct,
             id: 1,
@@ -93,7 +93,7 @@ export const LoadingState: Story = {
           onSelectProduct={(id) => console.log("Selected:", id)}
           isLoading={true}
         />
-        <ProductListItem
+        <ProductCard
           product={{
             ...mockProduct,
             id: 2,

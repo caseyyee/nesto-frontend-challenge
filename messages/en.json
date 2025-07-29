@@ -7,7 +7,8 @@
     "title": "Application",
     "home": "Go to home page",
     "errorLoading": "Error loading application:",
-    "unknownError": "Unknown error"
+    "unknownError": "Unknown error",
+    "selectedProduct": "Selected Product"
   },
   "ApplicationForm": {
     "title": "Applicant Information",
@@ -17,10 +18,10 @@
     "email": "Email",
     "phone": "Phone",
     "saving": "Saving...",
-    "saveButton": "Save Applicant Info",
-    "successMessage": "Applicant information saved successfully!",
-    "errorMessage": "Failed to save applicant information. Please try again.",
-    "updateError": "Failed to update application:",
+    "saveButton": "Save Application",
+    "successMessage": "Application saved!",
+    "errorMessage": "Failed to save. Please try again.",
+    "updateError": "Failed to update:",
     "validation": {
       "firstNameRequired": "First name is required",
       "firstNameMinLength": "First name must be at least 2 characters",
@@ -34,7 +35,7 @@
     }
   },
   "ApplicationSelector": {
-    "label": "Choose another application",
+    "label": "Choose application",
     "noApplications": "No applications available",
     "selectPrompt": "Select an application",
     "newApplication": "New Application {number}"

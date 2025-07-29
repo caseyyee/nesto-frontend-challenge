@@ -8,28 +8,32 @@ import { useTranslations } from "next-intl";
 import { Heading } from "./Heading";
 import { Text } from "./Text";
 import { Button } from "./Button";
+import { FieldLabel } from "./FieldLabel";
+import { Input } from "./Input";
+import { ErrorLabel } from "./ErrorLabel";
 import { api } from "@/lib/api";
 import { revalidateApplications } from "@/lib/actions";
 import type { Application } from "@/types/nesto";
+import clsx from "clsx";
 
-// Zod schema factory for applicant form validation with localized messages
-const createApplicantFormSchema = (t: (key: string) => string) => z.object({
-  firstName: z
-    .string()
-    .min(1, t("validation.firstNameRequired"))
-    .min(2, t("validation.firstNameMinLength"))
-    .max(50, t("validation.firstNameMaxLength")),
-  lastName: z
-    .string()
-    .min(1, t("validation.lastNameRequired"))
-    .min(2, t("validation.lastNameMinLength"))
-    .max(50, t("validation.lastNameMaxLength")),
-  email: z.email(t("validation.emailInvalid")),
-  phone: z
-    .string()
-    .min(1, t("validation.phoneRequired"))
-    .regex(/^[\+]?[\d\s\-\(\)\.]{5,20}$/, t("validation.phoneInvalid")),
-});
+const createApplicantFormSchema = (t: (key: string) => string) =>
+  z.object({
+    firstName: z
+      .string()
+      .min(1, t("validation.firstNameRequired"))
+      .min(2, t("validation.firstNameMinLength"))
+      .max(50, t("validation.firstNameMaxLength")),
+    lastName: z
+      .string()
+      .min(1, t("validation.lastNameRequired"))
+      .min(2, t("validation.lastNameMinLength"))
+      .max(50, t("validation.lastNameMaxLength")),
+    email: z.email(t("validation.emailInvalid")),
+    phone: z
+      .string()
+      .min(1, t("validation.phoneRequired"))
+      .regex(/^[\+]?[\d\s\-\(\)\.]{5,20}$/, t("validation.phoneInvalid")),
+  });
 
 type ApplicantFormData = z.infer<ReturnType<typeof createApplicantFormSchema>>;
 
@@ -48,13 +52,10 @@ interface ApplicationFormProps {
   initialApplication: Application;
 }
 
-export function ApplicationForm({
-  initialApplication,
-}: ApplicationFormProps) {
+export function ApplicationForm({ initialApplication }: ApplicationFormProps) {
   const queryClient = useQueryClient();
   const t = useTranslations("ApplicationForm");
 
-  // Initialize react-hook-form with Zod validation
   const {
     register,
     handleSubmit,
@@ -66,8 +67,12 @@ export function ApplicationForm({
     defaultValues: getDefaultValues(initialApplication),
   });
 
-  // Update application mutation
-  const updateApplicationMutation = useMutation({
+  const {
+    mutate: updateApplication,
+    isPending,
+    isError,
+    isSuccess,
+  } = useMutation({
     mutationFn: ({ id, data }: { id: string; data: Partial<Application> }) =>
       api.updateApplication(id, data),
     onSuccess: async (updatedApplication) => {
@@ -77,7 +82,7 @@ export function ApplicationForm({
         updatedApplication,
       );
 
-      // Update form data with the response to ensure consistency
+      // Update form data with the response
       if (updatedApplication.applicants?.[0]) {
         const applicant = updatedApplication.applicants[0];
         reset({
@@ -97,7 +102,9 @@ export function ApplicationForm({
   });
 
   const onSubmit = (data: ApplicantFormData) => {
-    if (!initialApplication?.id) return;
+    if (!initialApplication?.id) {
+      return;
+    }
 
     const updatedApplicants = [
       {
@@ -108,144 +115,84 @@ export function ApplicationForm({
       },
     ];
 
-    updateApplicationMutation.mutate({
+    updateApplication({
       id: initialApplication.id,
       data: { applicants: updatedApplicants },
     });
   };
 
-  if (!initialApplication) {
-    return (
-      <div>
-        <Heading level={2} className="mb-4">
-          {t("title")}
-        </Heading>
-        <Text className="text-gray-500">{t("noDataProvided")}</Text>
-      </div>
-    );
-  }
-
   return (
     <div>
-      <Heading level={2} className="mb-4">
-        {t("title")}
-      </Heading>
+      <div className="min-w-auto max-w-md mx-auto">
+        <Heading level={3} className="ml-2 mb-6">
+          {t("title")}
+        </Heading>
 
-      <div className="max-w-md">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
-            <label
-              htmlFor="firstName"
-              className="block text-sm font-medium mb-2"
-            >
-              {t("firstName")}
-            </label>
-            <input
+            <FieldLabel htmlFor="firstName">{t("firstName")}</FieldLabel>
+            <Input
               type="text"
               id="firstName"
+              variant={errors.firstName ? "error" : "default"}
               {...register("firstName")}
-              className={`w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-navy-blue focus:border-transparent ${
-                errors.firstName
-                  ? "border-red-500 focus:ring-red-500"
-                  : "border-gray-300"
-              }`}
             />
-            {errors.firstName && (
-              <Text size="xs" className="text-red-600 mt-1">
-                {errors.firstName.message}
-              </Text>
-            )}
+            <ErrorLabel error={errors.firstName} />
           </div>
 
           <div>
-            <label
-              htmlFor="lastName"
-              className="block text-sm font-medium mb-2"
-            >
-              {t("lastName")}
-            </label>
-            <input
+            <FieldLabel htmlFor="lastName">{t("lastName")}</FieldLabel>
+            <Input
               type="text"
               id="lastName"
+              variant={errors.lastName ? "error" : "default"}
               {...register("lastName")}
-              className={`w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-navy-blue focus:border-transparent ${
-                errors.lastName
-                  ? "border-red-500 focus:ring-red-500"
-                  : "border-gray-300"
-              }`}
             />
-            {errors.lastName && (
-              <Text size="xs" className="text-red-600 mt-1">
-                {errors.lastName.message}
-              </Text>
-            )}
+            <ErrorLabel error={errors.lastName} />
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-2">
-              {t("email")}
-            </label>
-            <input
+            <FieldLabel htmlFor="email">{t("email")}</FieldLabel>
+            <Input
               type="email"
               id="email"
+              variant={errors.email ? "error" : "default"}
               {...register("email")}
-              className={`w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-navy-blue focus:border-transparent ${
-                errors.email
-                  ? "border-red-500 focus:ring-red-500"
-                  : "border-gray-300"
-              }`}
             />
-            {errors.email && (
-              <Text size="xs" className="text-red-600 mt-1">
-                {errors.email.message}
-              </Text>
-            )}
+            <ErrorLabel error={errors.email} />
           </div>
 
           <div>
-            <label htmlFor="phone" className="block text-sm font-medium mb-2">
-              {t("phone")}
-            </label>
-            <input
+            <FieldLabel htmlFor="phone">{t("phone")}</FieldLabel>
+            <Input
               type="tel"
               id="phone"
+              variant={errors.phone ? "error" : "default"}
               {...register("phone")}
-              className={`w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-navy-blue focus:border-transparent ${
-                errors.phone
-                  ? "border-red-500 focus:ring-red-500"
-                  : "border-gray-300"
-              }`}
             />
-            {errors.phone && (
-              <Text size="xs" className="text-red-600 mt-1">
-                {errors.phone.message}
-              </Text>
-            )}
+            <ErrorLabel error={errors.phone} />
           </div>
 
-          <Button
-            type="submit"
-            disabled={
-              updateApplicationMutation.isPending || !isValid || !isDirty
-            }
-            className="w-full"
-          >
-            {updateApplicationMutation.isPending
-              ? t("saving")
-              : t("saveButton")}
-          </Button>
+          <div className="flex justify-center mt-8">
+            <Button type="submit" disabled={isPending || !isValid || !isDirty}>
+              {isPending ? t("saving") : t("saveButton")}
+            </Button>
+          </div>
 
-          {updateApplicationMutation.isSuccess && (
-            <Text size="sm" className="text-green-600">
-              {t("successMessage")}
-            </Text>
-          )}
-
-          {updateApplicationMutation.isError && (
-            <Text size="sm" className="text-red-600">
-              {t("errorMessage")}
-            </Text>
-          )}
+          {isError ||
+            (isSuccess && (
+              <Text
+                size="lg"
+                className={clsx(
+                  isError && "text-orange",
+                  isSuccess && "text-grand-blue",
+                  "font-semibold text-center",
+                )}
+              >
+                {isError && t("errorMessage")}
+                {isSuccess && t("successMessage")}
+              </Text>
+            ))}
         </form>
       </div>
     </div>
