@@ -15,6 +15,7 @@ const textStyles = cva("", {
       "4xl": "text-5xl",
       "5xl": "text-4xl md:text-6xl",
       "6xl": "text-5xl md:text-7xl",
+      "7xl": "text-6xl md:text-8xl",
     },
   },
   defaultVariants: {

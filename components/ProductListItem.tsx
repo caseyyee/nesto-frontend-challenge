@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { Button } from "./Button";
 import { termLabels, type ProductCardProps } from "./ProductCard";
 import { Text } from "./Text";
+import { NestoLogo } from "./NestoLogo";
 
 export function ProductListItem({
   product,
@@ -30,7 +31,11 @@ export function ProductListItem({
           %
         </Text>
       </div>
-      <Text>{product.lenderName}</Text>
+      {product.lenderName === "nesto" ? (
+        <NestoLogo />
+      ) : (
+        <Text>{product.lenderName}</Text>
+      )}
       <Text>{product.name}</Text>
       <Button
         className="mt-4"

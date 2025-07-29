@@ -3,6 +3,42 @@
     "logo": "nesto.ca | Best Mortgages  Rates, Period.",
     "title": "Find the Best Mortgage Rates in Canada"
   },
+  "ApplicationPage": {
+    "title": "Application",
+    "home": "Go to home page",
+    "errorLoading": "Error loading application:",
+    "unknownError": "Unknown error"
+  },
+  "ApplicationForm": {
+    "title": "Applicant Information",
+    "noDataProvided": "No application data provided.",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "phone": "Phone",
+    "saving": "Saving...",
+    "saveButton": "Save Applicant Info",
+    "successMessage": "Applicant information saved successfully!",
+    "errorMessage": "Failed to save applicant information. Please try again.",
+    "updateError": "Failed to update application:",
+    "validation": {
+      "firstNameRequired": "First name is required",
+      "firstNameMinLength": "First name must be at least 2 characters",
+      "firstNameMaxLength": "First name must be less than 50 characters",
+      "lastNameRequired": "Last name is required",
+      "lastNameMinLength": "Last name must be at least 2 characters",
+      "lastNameMaxLength": "Last name must be less than 50 characters",
+      "emailInvalid": "Please enter a valid email address",
+      "phoneRequired": "Phone number is required",
+      "phoneInvalid": "Please enter a valid phone number"
+    }
+  },
+  "ApplicationSelector": {
+    "label": "Choose another application",
+    "noApplications": "No applications available",
+    "selectPrompt": "Select an application",
+    "newApplication": "New Application {number}"
+  },
   "ProductList": {
     "bestVariable": "Best Variable",
     "bestFixed": "Best Fixed",

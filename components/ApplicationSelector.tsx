@@ -3,6 +3,7 @@
 import type { Application } from "@/types/nesto";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface ApplicationSelectorProps {
   applications: Application[];
@@ -14,6 +15,7 @@ export function ApplicationSelector({
   currentApplicationId,
 }: ApplicationSelectorProps) {
   const router = useRouter();
+  const t = useTranslations("ApplicationSelector");
   const [selectedApplicationId, setSelectedApplicationId] = useState<string>(
     currentApplicationId || "",
   );
@@ -33,7 +35,7 @@ export function ApplicationSelector({
         htmlFor="application-select"
         className="block text-sm font-medium mb-2"
       >
-        Choose another application
+        {t("label")}
       </label>
       <select
         id="application-select"
@@ -43,8 +45,8 @@ export function ApplicationSelector({
       >
         <option value="">
           {applications.length === 0
-            ? "No applications available"
-            : "Select an application"}
+            ? t("noApplications")
+            : t("selectPrompt")}
         </option>
         {applications.map((app, i) => {
           const [applicant] = app.applicants;
@@ -52,7 +54,7 @@ export function ApplicationSelector({
           const applicantName =
             applicant.firstName && applicant.lastName
               ? `${applicant.firstName} ${applicant.lastName}`
-              : `New Application ${i + 1}`;
+              : t("newApplication", { number: i + 1 });
 
           return (
             <option key={app.id} value={app.id}>

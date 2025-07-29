@@ -28,7 +28,13 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
-      <body className={clsx(montserrat.variable, "font-montserrat")}>
+      <body
+        className={clsx(
+          montserrat.variable,
+          "font-montserrat text-navy-blue",
+          "min-h-screen flex flex-col",
+        )}
+      >
         <QueryProvider>
           <NextIntlClientProvider>{children}</NextIntlClientProvider>
         </QueryProvider>

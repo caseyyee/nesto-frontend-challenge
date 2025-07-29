@@ -2,7 +2,6 @@ import { DEFAULT_HEADERS } from "@/lib/constants";
 import {
   Application,
   ApplicationSchema,
-  ApplicationsSchema,
   CreateApplication,
 } from "@/types/nesto";
 
@@ -13,33 +12,33 @@ if (!API_BASE_URL) {
 }
 
 export const api = {
-  async getApplications(): Promise<Application[]> {
-    const response = await fetch(`${API_BASE_URL}/applications`, {
-      method: "GET",
-      headers: DEFAULT_HEADERS,
-    });
+  // async getApplications(): Promise<Application[]> {
+  //   const response = await fetch(`${API_BASE_URL}/applications`, {
+  //     method: "GET",
+  //     headers: DEFAULT_HEADERS,
+  //   });
 
-    if (!response.ok) {
-      throw new Error(`Failed to fetch applications: ${response.statusText}`);
-    }
+  //   if (!response.ok) {
+  //     throw new Error(`Failed to fetch applications: ${response.statusText}`);
+  //   }
 
-    const data = await response.json();
-    return ApplicationsSchema.parse(data);
-  },
+  //   const data = await response.json();
+  //   return ApplicationsSchema.parse(data);
+  // },
 
-  async getApplication(id: string): Promise<Application> {
-    const response = await fetch(`${API_BASE_URL}/applications/${id}`, {
-      method: "GET",
-      headers: DEFAULT_HEADERS,
-    });
+  // async getApplication(id: string): Promise<Application> {
+  //   const response = await fetch(`${API_BASE_URL}/applications/${id}`, {
+  //     method: "GET",
+  //     headers: DEFAULT_HEADERS,
+  //   });
 
-    if (!response.ok) {
-      throw new Error(`Failed to fetch application: ${response.statusText}`);
-    }
+  //   if (!response.ok) {
+  //     throw new Error(`Failed to fetch application: ${response.statusText}`);
+  //   }
 
-    const data = await response.json();
-    return ApplicationSchema.parse(data);
-  },
+  //   const data = await response.json();
+  //   return ApplicationSchema.parse(data);
+  // },
 
   async createApplication(data: CreateApplication): Promise<Application> {
     const response = await fetch(`${API_BASE_URL}/applications`, {

@@ -1,15 +1,18 @@
 "use client";
 
+import { api } from "@/lib/api";
 import type { Product } from "@/types/nesto";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { ArrowRightIcon } from "@heroicons/react/16/solid";
+import { StarIcon } from "@heroicons/react/24/solid";
 import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
-import { api } from "@/lib/api";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { BestProductCard } from "./BestProductCard";
 import { Button } from "./Button";
-import { Heading } from "./Heading";
 import { ProductCard } from "./ProductCard";
 import { ProductListItem } from "./ProductListItem";
+import { ProductListSection } from "./ProductListSection";
 
 interface ProductListProps {
   variable: Product[];
@@ -40,73 +43,77 @@ export function ProductList({ variable, fixed }: ProductListProps) {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 md:w-5/6 mx-auto">
-      <div className="p-4 rounded-lg flex flex-col gap-4 items-center">
-        <Heading level={2}>{t("bestVariable")}</Heading>
+    <div className="grid grid-cols-1 md:grid-cols-2">
+      <div className="p-4 rounded-lg flex flex-col gap-8 items-center">
         {bestVariable && (
-          <ProductCard
-            product={bestVariable}
-            onSelectProduct={handleSelectProduct}
-            isLoading={createApplicationMutation.isPending}
-          />
+          <BestProductCard
+            title={t("bestVariable")}
+            startIcon={<StarIcon className="w-6 h-6 text-white" />}
+          >
+            <ProductCard
+              product={bestVariable}
+              onSelectProduct={handleSelectProduct}
+              isLoading={createApplicationMutation.isPending}
+            />
+          </BestProductCard>
         )}
 
         {restVariable.length > 0 && showMoreVariable && (
-          <>
-            <Heading level={3}>{t("variableRates")}</Heading>
-            <div className="w-full grid grid-cols-1 divide-y divide-navy-blue border-navy-blue border rounded-4xl bg-baby-blue">
-              {restVariable.map((product) => (
-                <ProductListItem
-                  key={product.id}
-                  product={product}
-                  onSelectProduct={handleSelectProduct}
-                  isLoading={createApplicationMutation.isPending}
-                />
-              ))}
-            </div>
-          </>
+          <ProductListSection title={t("variableRates")}>
+            {restVariable.map((product) => (
+              <ProductListItem
+                key={product.id}
+                product={product}
+                onSelectProduct={handleSelectProduct}
+                isLoading={createApplicationMutation.isPending}
+              />
+            ))}
+          </ProductListSection>
         )}
 
         {restVariable.length > 0 && !showMoreVariable && (
           <Button
             onClick={() => setShowMoreVariable(!showMoreVariable)}
             variant="tertiary"
+            endIcon={<ArrowRightIcon className="w-4 h-4" />}
           >
             {t("moreVariable", { count: restVariable.length })}
           </Button>
         )}
       </div>
 
-      <div className="p-4 rounded-lg flex flex-col gap-4 items-center">
-        <Heading level={2}>{t("bestFixed")}</Heading>
+      <div className="p-4 rounded-lg flex flex-col gap-8 items-center">
         {bestFixed && (
-          <ProductCard
-            product={bestFixed}
-            onSelectProduct={handleSelectProduct}
-            isLoading={createApplicationMutation.isPending}
-          />
+          <BestProductCard
+            title={t("bestFixed")}
+            startIcon={<StarIcon className="w-6 h-6 text-white" />}
+          >
+            <ProductCard
+              product={bestFixed}
+              onSelectProduct={handleSelectProduct}
+              isLoading={createApplicationMutation.isPending}
+            />
+          </BestProductCard>
         )}
 
         {restFixed.length > 0 && showMoreFixed && (
-          <>
-            <Heading level={3}>{t("fixedRates")}</Heading>
-            <div className="w-full grid grid-cols-1 divide-y divide-navy-blue border-navy-blue border rounded-4xl bg-baby-blue">
-              {restFixed.map((product) => (
-                <ProductListItem
-                  key={product.id}
-                  product={product}
-                  onSelectProduct={handleSelectProduct}
-                  isLoading={createApplicationMutation.isPending}
-                />
-              ))}
-            </div>
-          </>
+          <ProductListSection title={t("fixedRates")}>
+            {restFixed.map((product) => (
+              <ProductListItem
+                key={product.id}
+                product={product}
+                onSelectProduct={handleSelectProduct}
+                isLoading={createApplicationMutation.isPending}
+              />
+            ))}
+          </ProductListSection>
         )}
 
         {restFixed.length > 0 && !showMoreFixed && (
           <Button
             onClick={() => setShowMoreFixed(!showMoreFixed)}
             variant="tertiary"
+            endIcon={<ArrowRightIcon className="w-4 h-4" />}
           >
             {t("moreFixed", { count: restFixed.length })}
           </Button>

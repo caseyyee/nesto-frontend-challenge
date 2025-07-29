@@ -4,9 +4,12 @@ import { HTMLAttributes } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "./Button";
 import { Text } from "./Text";
+import { NestoLogo } from "./NestoLogo";
 
 export interface ProductCardProps extends HTMLAttributes<HTMLDivElement> {
   product: Product;
+  onSelectProduct?: (productId: number) => void;
+  isLoading?: boolean;
 }
 
 export const termLabels = {
@@ -20,6 +23,11 @@ export const termLabels = {
   "10_YEAR": "10-year",
 };
 
+const termType = {
+  VARIABLE: "variable",
+  FIXED: "fixed",
+};
+
 export function ProductCard({
   product,
   className,
@@ -31,18 +39,23 @@ export function ProductCard({
   isLoading?: boolean;
 }) {
   const t = useTranslations("ProductList");
+
   return (
     <div
       key={product.id}
       className={clsx(
-        "bg-baby-blue p-4 mb-2 rounded-4xl flex flex-col items-center w-full border-navy-blue border",
+        // "p-6 rounded-4xl flex flex-col items-center w-full bg-white/60 backdrop-blur-lg shadow-lg",
+        "p-6 rounded-3xl flex flex-col items-center w-full bg-white",
         className,
       )}
       {...rest}
     >
-      <Text>{termLabels[product.term]}</Text>
+      <Text className="font-bold">
+        {termLabels[product.term]} {termType[product.type]}
+      </Text>
+
       <div className="flex">
-        <Text size={"6xl"} className={clsx("font-bold")}>
+        <Text size={"6xl"} className={clsx("font-extrabold")}>
           {product.bestRate}
         </Text>
         <Text size={"2xl"} className="font-bold">
@@ -50,12 +63,20 @@ export function ProductCard({
         </Text>
       </div>
 
-      <Text>{product.lenderName}</Text>
-      <Text>{product.name}</Text>
+      <div className="mt-4">
+        {product.lenderName === "nesto" ? (
+          <NestoLogo />
+        ) : (
+          <Text>{product.lenderName}</Text>
+        )}
+      </div>
+
+      <Text className="mt-1">{product.name}</Text>
+
       {onSelectProduct && (
         <Button
-          className="mt-4"
-          variant={"primary"}
+          className="mt-5"
+          variant="primary"
           onClick={() => onSelectProduct(product.id)}
           disabled={isLoading}
         >

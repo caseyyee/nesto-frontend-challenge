@@ -36,7 +36,7 @@ export function LanguageToggle() {
             "px-3 py-1 transition-colors",
             locale === loc
               ? "bg-navy-blue text-white"
-              : "bg-baby-blue text-navy-blue hover:bg-navy-blue hover:text-white",
+              : "bg-white text-navy-blue hover:bg-navy-blue hover:text-white",
           )}
         >
           <span className="sr-only">{getSrLabel(loc, locale === loc)}</span>

@@ -36,11 +36,14 @@ pnpm run storybook
 
 # About the Stack
 
+- Server render pages
+- Server side GET fetches, POST, PUT, PATCH updates done client-side with react-query
+- Zod validated both incoming and outgoing
+- Server actions used to invalidate server component queries
 - Why did I chose to use TailwindCSS instead of styled-components?
-  - Class variant Authority to manage variants
+  - Class variant Authority to manage component variants
 - Component testing with vitest, `*.test.*` files.
 - Storybook for visual testing and component reference, `*.stories.*` files.
-- Uses React-Query to manage API usage and Zod to validate data.
 
 # Issues found
 
@@ -79,6 +82,12 @@ pnpm run storybook
 - [ ] review product-utils.test.ts, cross check mock data
 - [ ] screenreader accessilbility (language toggle)
 - [ ] dark mode?
+- [ ] remove uneeded api functions
+- [ ] pageheader in layout
+- [ ] add footer or spacing
+- [ ] suspense for application form
+- [ ] move bg to component
+- [ ] move % to component
 
 ## App Must have
 

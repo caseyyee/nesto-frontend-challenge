@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
 import { Heading } from "./Heading";
 import { Text } from "./Text";
 import { Button } from "./Button";
@@ -11,26 +12,26 @@ import { api } from "@/lib/api";
 import { revalidateApplications } from "@/lib/actions";
 import type { Application } from "@/types/nesto";
 
-// Zod schema for applicant form validation
-const applicantFormSchema = z.object({
+// Zod schema factory for applicant form validation with localized messages
+const createApplicantFormSchema = (t: (key: string) => string) => z.object({
   firstName: z
     .string()
-    .min(1, "First name is required")
-    .min(2, "First name must be at least 2 characters")
-    .max(50, "First name must be less than 50 characters"),
+    .min(1, t("validation.firstNameRequired"))
+    .min(2, t("validation.firstNameMinLength"))
+    .max(50, t("validation.firstNameMaxLength")),
   lastName: z
     .string()
-    .min(1, "Last name is required")
-    .min(2, "Last name must be at least 2 characters")
-    .max(50, "Last name must be less than 50 characters"),
-  email: z.email("Please enter a valid email address"),
+    .min(1, t("validation.lastNameRequired"))
+    .min(2, t("validation.lastNameMinLength"))
+    .max(50, t("validation.lastNameMaxLength")),
+  email: z.email(t("validation.emailInvalid")),
   phone: z
     .string()
-    .min(1, "Phone number is required")
-    .regex(/^[\+]?[\d\s\-\(\)\.]{5,20}$/, "Please enter a valid phone number"),
+    .min(1, t("validation.phoneRequired"))
+    .regex(/^[\+]?[\d\s\-\(\)\.]{5,20}$/, t("validation.phoneInvalid")),
 });
 
-type ApplicantFormData = z.infer<typeof applicantFormSchema>;
+type ApplicantFormData = z.infer<ReturnType<typeof createApplicantFormSchema>>;
 
 // Helper function to extract default values from application data
 const getDefaultValues = (application: Application): ApplicantFormData => {
@@ -51,6 +52,7 @@ export function ApplicationForm({
   initialApplication,
 }: ApplicationFormProps) {
   const queryClient = useQueryClient();
+  const t = useTranslations("ApplicationForm");
 
   // Initialize react-hook-form with Zod validation
   const {
@@ -59,7 +61,7 @@ export function ApplicationForm({
     reset,
     formState: { errors, isValid, isDirty },
   } = useForm<ApplicantFormData>({
-    resolver: zodResolver(applicantFormSchema),
+    resolver: zodResolver(createApplicantFormSchema(t)),
     mode: "onBlur",
     defaultValues: getDefaultValues(initialApplication),
   });
@@ -90,7 +92,7 @@ export function ApplicationForm({
       await revalidateApplications();
     },
     onError: (error) => {
-      console.error("Failed to update application:", error);
+      console.error(t("updateError"), error);
     },
   });
 
@@ -116,9 +118,9 @@ export function ApplicationForm({
     return (
       <div>
         <Heading level={2} className="mb-4">
-          Applicant Information
+          {t("title")}
         </Heading>
-        <Text className="text-gray-500">No application data provided.</Text>
+        <Text className="text-gray-500">{t("noDataProvided")}</Text>
       </div>
     );
   }
@@ -126,7 +128,7 @@ export function ApplicationForm({
   return (
     <div>
       <Heading level={2} className="mb-4">
-        Applicant Information
+        {t("title")}
       </Heading>
 
       <div className="max-w-md">
@@ -136,7 +138,7 @@ export function ApplicationForm({
               htmlFor="firstName"
               className="block text-sm font-medium mb-2"
             >
-              First Name
+              {t("firstName")}
             </label>
             <input
               type="text"
@@ -160,7 +162,7 @@ export function ApplicationForm({
               htmlFor="lastName"
               className="block text-sm font-medium mb-2"
             >
-              Last Name
+              {t("lastName")}
             </label>
             <input
               type="text"
@@ -181,7 +183,7 @@ export function ApplicationForm({
 
           <div>
             <label htmlFor="email" className="block text-sm font-medium mb-2">
-              Email
+              {t("email")}
             </label>
             <input
               type="email"
@@ -202,7 +204,7 @@ export function ApplicationForm({
 
           <div>
             <label htmlFor="phone" className="block text-sm font-medium mb-2">
-              Phone
+              {t("phone")}
             </label>
             <input
               type="tel"
@@ -229,19 +231,19 @@ export function ApplicationForm({
             className="w-full"
           >
             {updateApplicationMutation.isPending
-              ? "Saving..."
-              : "Save Applicant Info"}
+              ? t("saving")
+              : t("saveButton")}
           </Button>
 
           {updateApplicationMutation.isSuccess && (
             <Text size="sm" className="text-green-600">
-              Applicant information saved successfully!
+              {t("successMessage")}
             </Text>
           )}
 
           {updateApplicationMutation.isError && (
             <Text size="sm" className="text-red-600">
-              Failed to save applicant information. Please try again.
+              {t("errorMessage")}
             </Text>
           )}
         </form>

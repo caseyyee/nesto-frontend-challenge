@@ -64,7 +64,7 @@ export default async function ApplicationPage({
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
           <Heading level={1}>{t("title")}</Heading>
           <p>
-            Error loading application:{" "}
+            Error loading application:
             {error instanceof Error ? error.message : "Unknown error"}
           </p>
 

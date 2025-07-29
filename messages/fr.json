@@ -3,6 +3,42 @@
     "logo": "Find the Best Mortgage Rates in Canada",
     "title": "Taux hypothécaires"
   },
+  "ApplicationPage": {
+    "title": "Demande",
+    "home": "Aller à la page d'accueil",
+    "errorLoading": "Erreur lors du chargement de la demande:",
+    "unknownError": "Erreur inconnue"
+  },
+  "ApplicationForm": {
+    "title": "Informations du demandeur",
+    "noDataProvided": "Aucune donnée de demande fournie.",
+    "firstName": "Prénom",
+    "lastName": "Nom de famille",
+    "email": "Courriel",
+    "phone": "Téléphone",
+    "saving": "Enregistrement...",
+    "saveButton": "Enregistrer les informations",
+    "successMessage": "Informations du demandeur enregistrées avec succès!",
+    "errorMessage": "Échec de l'enregistrement des informations. Veuillez réessayer.",
+    "updateError": "Échec de mise à jour de la demande:",
+    "validation": {
+      "firstNameRequired": "Le prénom est requis",
+      "firstNameMinLength": "Le prénom doit contenir au moins 2 caractères",
+      "firstNameMaxLength": "Le prénom doit contenir moins de 50 caractères",
+      "lastNameRequired": "Le nom de famille est requis",
+      "lastNameMinLength": "Le nom de famille doit contenir au moins 2 caractères",
+      "lastNameMaxLength": "Le nom de famille doit contenir moins de 50 caractères",
+      "emailInvalid": "Veuillez entrer une adresse courriel valide",
+      "phoneRequired": "Le numéro de téléphone est requis",
+      "phoneInvalid": "Veuillez entrer un numéro de téléphone valide"
+    }
+  },
+  "ApplicationSelector": {
+    "label": "Choisir une autre demande",
+    "noApplications": "Aucune demande disponible",
+    "selectPrompt": "Sélectionner une demande",
+    "newApplication": "Nouvelle demande {number}"
+  },
   "ProductList": {
     "bestVariable": "Meilleur Variable",
     "bestFixed": "Meilleur Fixe",

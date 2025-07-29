@@ -69,8 +69,12 @@ describe("ProductList", () => {
         <ProductList variable={variableProducts} fixed={fixedProducts} />,
       );
 
-      expect(screen.getByText(messages.ProductList.bestVariable)).toBeInTheDocument();
-      expect(screen.getByText(messages.ProductList.bestFixed)).toBeInTheDocument();
+      expect(
+        screen.getByText(messages.ProductList.bestVariable),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(messages.ProductList.bestFixed),
+      ).toBeInTheDocument();
 
       // Should show the first (best) product of each type
       expect(
@@ -82,12 +86,25 @@ describe("ProductList", () => {
     it("handles empty product lists gracefully", () => {
       renderWithWrapper(<ProductList variable={[]} fixed={[]} />);
 
-      expect(screen.getByText(messages.ProductList.bestVariable)).toBeInTheDocument();
-      expect(screen.getByText(messages.ProductList.bestFixed)).toBeInTheDocument();
+      // Should not show best product cards when no products
+      expect(
+        screen.queryByText(messages.ProductList.bestVariable),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(messages.ProductList.bestFixed),
+      ).not.toBeInTheDocument();
 
       // Should not show buttons when no additional products
-      expect(screen.queryByText(/more variable/)).not.toBeInTheDocument();
-      expect(screen.queryByText(/more fixed/)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(
+          messages.ProductList.moreVariable.replace("{count}", "1"),
+        ),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(
+          messages.ProductList.moreFixed.replace("{count}", "1"),
+        ),
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -99,7 +116,7 @@ describe("ProductList", () => {
 
       // Should show "more variable" button
       const moreVariableButton = screen.getByRole("button", {
-        name: /more variable/,
+        name: messages.ProductList.moreVariable.replace("{count}", "1"),
       });
       expect(moreVariableButton).toBeInTheDocument();
 
@@ -107,7 +124,9 @@ describe("ProductList", () => {
       fireEvent.click(moreVariableButton);
 
       // Should show additional variable products section
-      expect(screen.getByText(messages.ProductList.variableRates)).toBeInTheDocument();
+      expect(
+        screen.getByText(messages.ProductList.variableRates),
+      ).toBeInTheDocument();
 
       // Should show all variable products except the first one
       variableProducts.slice(1).forEach((product) => {
@@ -122,7 +141,7 @@ describe("ProductList", () => {
 
       // Should show "more fixed" button
       const moreFixedButton = screen.getByRole("button", {
-        name: /more fixed/,
+        name: messages.ProductList.moreFixed.replace("{count}", "1"),
       });
       expect(moreFixedButton).toBeInTheDocument();
 
@@ -130,7 +149,9 @@ describe("ProductList", () => {
       fireEvent.click(moreFixedButton);
 
       // Should show additional fixed products section
-      expect(screen.getByText(messages.ProductList.fixedRates)).toBeInTheDocument();
+      expect(
+        screen.getByText(messages.ProductList.fixedRates),
+      ).toBeInTheDocument();
 
       // Should show all fixed products except the first one
       fixedProducts.slice(1).forEach((product) => {
@@ -154,7 +175,9 @@ describe("ProductList", () => {
       );
 
       // Click select button on the first variable product
-      const selectButtons = screen.getAllByText(messages.ProductList.selectProduct);
+      const selectButtons = screen.getAllByText(
+        messages.ProductList.selectProduct,
+      );
       fireEvent.click(selectButtons[0]);
 
       // Wait for API call to be made
@@ -177,14 +200,18 @@ describe("ProductList", () => {
       const pendingPromise = new Promise((resolve) => {
         resolvePromise = resolve;
       });
-      mockCreateApplication.mockReturnValue(pendingPromise as ReturnType<typeof api.createApplication>);
+      mockCreateApplication.mockReturnValue(
+        pendingPromise as ReturnType<typeof api.createApplication>,
+      );
 
       renderWithWrapper(
         <ProductList variable={variableProducts} fixed={fixedProducts} />,
       );
 
       // Click select button
-      const selectButtons = screen.getAllByText(messages.ProductList.selectProduct);
+      const selectButtons = screen.getAllByText(
+        messages.ProductList.selectProduct,
+      );
       fireEvent.click(selectButtons[0]);
 
       // Should show loading text
@@ -198,8 +225,9 @@ describe("ProductList", () => {
       const allButtons = screen.getAllByRole("button");
       const disabledButtons = allButtons.filter(
         (button) =>
-          button.textContent?.includes(messages.ProductList.creatingApplication) ||
-          button.textContent?.includes(messages.ProductList.selectProduct),
+          button.textContent?.includes(
+            messages.ProductList.creatingApplication,
+          ) || button.textContent?.includes(messages.ProductList.selectProduct),
       );
 
       disabledButtons.forEach((button) => {
@@ -226,7 +254,9 @@ describe("ProductList", () => {
       );
 
       // Click select button
-      const selectButtons = screen.getAllByText(messages.ProductList.selectProduct);
+      const selectButtons = screen.getAllByText(
+        messages.ProductList.selectProduct,
+      );
       fireEvent.click(selectButtons[0]);
 
       // Should log error
