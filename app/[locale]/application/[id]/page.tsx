@@ -2,7 +2,7 @@ import { ApplicationForm } from "@/components/ApplicationForm";
 import { ApplicationSelector } from "@/components/ApplicationSelector";
 import { Heading } from "@/components/Heading";
 import { PageHeader } from "@/components/PageHeader";
-import { ProductCard } from "@/components/ProductList";
+import { ProductCard } from "@/components/ProductCard";
 import {
   fetchApplicationServer,
   fetchApplicationsServer,

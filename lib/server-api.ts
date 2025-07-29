@@ -1,10 +1,9 @@
+import { DEFAULT_HEADERS } from "@/lib/constants";
 import {
-  ProductsSchema,
-  ProductSchema,
   ApplicationSchema,
   ApplicationsSchema,
+  ProductsSchema,
 } from "@/types/nesto";
-import { DEFAULT_HEADERS } from "@/lib/constants";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_NESTO_API;
 
@@ -53,7 +52,10 @@ export async function fetchApplicationsServer() {
     const response = await fetch(`${API_BASE_URL}/applications`, {
       method: "GET",
       headers: DEFAULT_HEADERS,
-      next: { revalidate: 300 }, // 5 minutes
+      next: {
+        revalidate: 300, // 5 minutes
+        tags: ["applications"],
+      },
     });
 
     if (!response.ok) {

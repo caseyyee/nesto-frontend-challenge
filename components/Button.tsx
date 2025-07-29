@@ -9,8 +9,8 @@ const buttonStyles = cva(
         primary:
           "bg-yellow font-bold text-navy-blue hover:bg-navy-blue hover:text-white focus:ring-navy-blue",
         secondary:
-          "font-bold bg-navy-blue text-white hover:bg-navy-blue hover:text-white focus:ring-navy-blue",
-        tertiary: "font-bold text-navy-blue underline hover:bg-gray-200",
+          "font-bold bg-navy-blue text-white hover:bg-white hover:text-navy-blue focus:ring-navy-blue hover:outline hover:outline-navy-blue",
+        tertiary: "font-bold text-navy-blue hover:text-grand-blue underline",
       },
       size: {
         base: "px-4 py-2 text-base",

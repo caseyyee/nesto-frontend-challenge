@@ -4,29 +4,35 @@ It's mortgage season! My challenge is to build a microsite that empowers clients
 
 # Local Development Setup
 
-## 1. Environment variables
-
-1. Copy example environment to local
+### 1. Specify environment variables in `.env.local`
 
 ```bash
-cp .env.example .env.local
-```
-
-2. Specify environment variables
-
-```
 NEXT_PUBLIC_NESTO_API="nesto-api-endpoint"
 ```
 
-## 2. Install dependencies
+### 2. Install dependencies
 
 ```bash
-# Install Dependencies
 pnpm install
+```
 
+### 3. Commands
+
+```bash
 # Run Development Server
 pnpm run dev
+
+# Run lint
+pnpm run lint
+
+# Run type-check
+pnpm run type-check
+
+# Run storybook
+pnpm run storybook
 ```
+
+# Project structure
 
 # About the Stack
 

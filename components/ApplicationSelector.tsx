@@ -52,7 +52,7 @@ export function ApplicationSelector({
           const applicantName =
             applicant.firstName && applicant.lastName
               ? `${applicant.firstName} ${applicant.lastName}`
-              : app.id.slice(0, 8);
+              : `New Application ${i + 1}`;
 
           return (
             <option key={app.id} value={app.id}>

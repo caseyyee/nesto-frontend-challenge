@@ -8,6 +8,7 @@ import { Heading } from "./Heading";
 import { Text } from "./Text";
 import { Button } from "./Button";
 import { api } from "@/lib/api";
+import { revalidateApplications } from "@/lib/actions";
 import type { Application } from "@/types/nesto";
 
 // Zod schema for applicant form validation
@@ -67,7 +68,7 @@ export function ApplicationForm({
   const updateApplicationMutation = useMutation({
     mutationFn: ({ id, data }: { id: string; data: Partial<Application> }) =>
       api.updateApplication(id, data),
-    onSuccess: (updatedApplication) => {
+    onSuccess: async (updatedApplication) => {
       // Update the cache with new data
       queryClient.setQueryData(
         ["application", initialApplication.id],
@@ -84,6 +85,9 @@ export function ApplicationForm({
           phone: applicant.phone || "",
         });
       }
+
+      // Revalidate applications cache to update ApplicationSelector
+      await revalidateApplications();
     },
     onError: (error) => {
       console.error("Failed to update application:", error);
