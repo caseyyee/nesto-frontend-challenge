@@ -39,14 +39,14 @@ export const ProductSchema = z.object({
 
 export const ApplicantSchema = z.object({
   phone: z.string(),
-  email: z.string().email(),
+  email: z.string(), // Allow empty strings for now since API returns empty
   firstName: z.string(),
   lastName: z.string(),
 });
 
 export const ApplicationSchema = z.object({
   id: z.string(),
-  token: z.string(),
+  token: z.string().optional(), // Make token optional since API doesn't return it
   type: z.enum(["NEW", "RENEWAL", "REFINANCE"]),
   applicants: z.array(ApplicantSchema),
   productId: z.number().optional(),
