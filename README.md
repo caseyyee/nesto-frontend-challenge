@@ -2,7 +2,7 @@
 
 It's mortgage season! My challenge is to build a microsite that empowers clients to get the lowest rate on first try!
 
-- [View Deployed App](https://nesto-frontend-challenge-5qqn3srj8-casey-yees-projects.vercel.app/)
+- [View Deployed App](https://nesto-frontend-challenge.vercel.app/)
 - [Github](https://github.com/caseyyee/nesto-frontend-challenge)
 
 <img src="https://raw.githubusercontent.com/caseyyee/nesto-frontend-challenge/master/docs/home-desktop.jpg" alt="Home">
