@@ -10,12 +10,9 @@ const selectStyles = cva(
       variant: {
         default: "border-navy-blue focus:ring-navy-blue",
         error: "ring-orange border-orange focus:ring-orange",
-        // success: "border-green-500 focus:ring-green-500",
       },
       size: {
-        // sm: "px-2 py-1 text-sm",
         base: "px-3 py-3 text-base",
-        // lg: "px-4 py-3 text-lg",
       },
     },
     defaultVariants: {

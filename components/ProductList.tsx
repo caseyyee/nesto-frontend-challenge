@@ -45,7 +45,7 @@ export function ProductList({ variable, fixed }: ProductListProps) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2">
-      <div className="p-4 rounded-lg flex flex-col gap-8 items-center">
+      <div className="p-4 rounded-lg flex flex-col gap-4 md:gap-8 items-center">
         {bestVariable && (
           <BestProductCard
             title={t("bestVariable")}
@@ -84,7 +84,7 @@ export function ProductList({ variable, fixed }: ProductListProps) {
         )}
       </div>
 
-      <div className="p-4 rounded-lg flex flex-col gap-8 items-center">
+      <div className="p-4 rounded-lg flex flex-col gap-4 md:gap-8 items-center">
         {bestFixed && (
           <BestProductCard
             title={t("bestFixed")}

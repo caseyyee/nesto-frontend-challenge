@@ -3,7 +3,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { Heading } from "./Heading";
 import { Text } from "./Text";
@@ -11,8 +10,7 @@ import { Button } from "./Button";
 import { FieldLabel } from "./FieldLabel";
 import { Input } from "./Input";
 import { ErrorLabel } from "./ErrorLabel";
-import { api } from "@/lib/api";
-import { revalidateApplications } from "@/lib/actions";
+import { useUpdateApplication } from "@/hooks/useUpdateApplication";
 import type { Application } from "@/types/nesto";
 import clsx from "clsx";
 
@@ -53,7 +51,6 @@ interface ApplicationFormProps {
 }
 
 export function ApplicationForm({ initialApplication }: ApplicationFormProps) {
-  const queryClient = useQueryClient();
   const t = useTranslations("ApplicationForm");
 
   const {
@@ -67,21 +64,9 @@ export function ApplicationForm({ initialApplication }: ApplicationFormProps) {
     defaultValues: getDefaultValues(initialApplication),
   });
 
-  const {
-    mutate: updateApplication,
-    isPending,
-    isError,
-    isSuccess,
-  } = useMutation({
-    mutationFn: ({ id, data }: { id: string; data: Partial<Application> }) =>
-      api.updateApplication(id, data),
-    onSuccess: async (updatedApplication) => {
-      // Update the cache with new data
-      queryClient.setQueryData(
-        ["application", initialApplication.id],
-        updatedApplication,
-      );
-
+  const { updateApplication, isPending, isError, isSuccess } = useUpdateApplication({
+    initialApplication,
+    onSuccess: (updatedApplication) => {
       // Update form data with the response
       if (updatedApplication.applicants?.[0]) {
         const applicant = updatedApplication.applicants[0];
@@ -92,9 +77,6 @@ export function ApplicationForm({ initialApplication }: ApplicationFormProps) {
           phone: applicant.phone || "",
         });
       }
-
-      // Revalidate applications cache to update ApplicationSelector
-      await revalidateApplications();
     },
     onError: (error) => {
       console.error(t("updateError"), error);
@@ -102,10 +84,6 @@ export function ApplicationForm({ initialApplication }: ApplicationFormProps) {
   });
 
   const onSubmit = (data: ApplicantFormData) => {
-    if (!initialApplication?.id) {
-      return;
-    }
-
     const updatedApplicants = [
       {
         firstName: data.firstName,
@@ -115,10 +93,7 @@ export function ApplicationForm({ initialApplication }: ApplicationFormProps) {
       },
     ];
 
-    updateApplication({
-      id: initialApplication.id,
-      data: { applicants: updatedApplicants },
-    });
+    updateApplication({ applicants: updatedApplicants });
   };
 
   return (
