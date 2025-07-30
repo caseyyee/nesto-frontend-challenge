@@ -5,10 +5,12 @@ It's mortgage season! My challenge is to build a microsite that empowers clients
 - [View Deployed App](https://nesto-frontend-challenge-5qqn3srj8-casey-yees-projects.vercel.app/)
 - [Github](https://github.com/caseyyee/nesto-frontend-challenge)
 
-![Home](https://raw.githubusercontent.com/caseyyee/nesto-frontend-challenge/master/docs/home-desktop.jpg)
-![Application](https://raw.githubusercontent.com/caseyyee/nesto-frontend-challenge/master/docs/application-desktop.jpg)
-![Home - mobile](https://raw.githubusercontent.com/caseyyee/nesto-frontend-challenge/master/docs/home.jpg)
-![Application - mobile](https://raw.githubusercontent.com/caseyyee/nesto-frontend-challenge/master/docs/application.jpg)
+<img src="https://raw.githubusercontent.com/caseyyee/nesto-frontend-challenge/master/docs/home-desktop.jpg" alt="Home">
+<img src="https://raw.githubusercontent.com/caseyyee/nesto-frontend-challenge/master/docs/application-desktop.jpg" alt="Application">
+<div style="display:flex">
+<img src="https://raw.githubusercontent.com/caseyyee/nesto-frontend-challenge/master/docs/home.jpg" alt="Home - mobile" height="850">
+<img src="https://raw.githubusercontent.com/caseyyee/nesto-frontend-challenge/master/docs/application.jpg" alt="Application - mobile" height="850">
+</div>
 
 # Local Development Setup
 
