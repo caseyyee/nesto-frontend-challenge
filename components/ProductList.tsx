@@ -37,6 +37,8 @@ export function ProductList({ variable, fixed }: ProductListProps) {
     },
   });
 
+  const { isPending } = createApplicationMutation;
+
   const handleSelectProduct = (productId: number) => {
     createApplicationMutation.mutate({ productId });
   };
@@ -53,7 +55,7 @@ export function ProductList({ variable, fixed }: ProductListProps) {
               variant="best"
               product={bestVariable}
               onSelectProduct={handleSelectProduct}
-              isLoading={createApplicationMutation.isPending}
+              isLoading={isPending}
             />
           </BestProductCard>
         )}
@@ -65,7 +67,7 @@ export function ProductList({ variable, fixed }: ProductListProps) {
                 key={product.id}
                 product={product}
                 onSelectProduct={handleSelectProduct}
-                isLoading={createApplicationMutation.isPending}
+                isLoading={isPending}
               />
             ))}
           </ProductListSection>
@@ -92,7 +94,7 @@ export function ProductList({ variable, fixed }: ProductListProps) {
               variant="best"
               product={bestFixed}
               onSelectProduct={handleSelectProduct}
-              isLoading={createApplicationMutation.isPending}
+              isLoading={isPending}
             />
           </BestProductCard>
         )}
@@ -104,7 +106,7 @@ export function ProductList({ variable, fixed }: ProductListProps) {
                 key={product.id}
                 product={product}
                 onSelectProduct={handleSelectProduct}
-                isLoading={createApplicationMutation.isPending}
+                isLoading={isPending}
               />
             ))}
           </ProductListSection>

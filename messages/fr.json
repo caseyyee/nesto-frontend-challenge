@@ -4,34 +4,28 @@
     "title": "Trouvez les meilleurs taux hypothécaires au Canada"
   },
   "ApplicationPage": {
-    "title": "Demande",
-    "home": "Aller à la page d'accueil",
-    "errorLoading": "Erreur lors du chargement de la demande:",
-    "unknownError": "Erreur inconnue",
     "selectedProduct": "Produit sélectionné"
   },
   "ApplicationForm": {
     "title": "Informations du demandeur",
-    "noDataProvided": "Aucune donnée de demande fournie.",
     "firstName": "Prénom",
     "lastName": "Nom de famille",
     "email": "Courriel",
     "phone": "Téléphone",
-    "saving": "Enregistrement...",
     "saveButton": "Enregistrer la demande",
-    "successMessage": "Demande enregistrée!",
-    "errorMessage": "Échec de l'enregistrement. Veuillez réessayer.",
-    "updateError": "Échec de mise à jour de la demande:",
+    "successMessage": "Demande enregistrée",
+    "errorMessage": "Échec de l'enregistrement",
+    "updateError": "Échec de mise à jour",
     "validation": {
       "firstNameRequired": "Le prénom est requis",
-      "firstNameMinLength": "Le prénom doit contenir au moins 2 caractères",
-      "firstNameMaxLength": "Le prénom doit contenir moins de 50 caractères",
+      "firstNameMinLength": "Doit contenir au moins 2 caractères",
+      "firstNameMaxLength": "Doit contenir moins de 50 caractères",
       "lastNameRequired": "Le nom de famille est requis",
-      "lastNameMinLength": "Le nom de famille doit contenir au moins 2 caractères",
-      "lastNameMaxLength": "Le nom de famille doit contenir moins de 50 caractères",
-      "emailInvalid": "Veuillez entrer une adresse courriel valide",
+      "lastNameMinLength": "Doit contenir au moins 2 caractères",
+      "lastNameMaxLength": "Doit contenir moins de 50 caractères",
+      "emailInvalid": "Entrez une adresse courriel valide",
       "phoneRequired": "Le numéro de téléphone est requis",
-      "phoneInvalid": "Veuillez entrer un numéro de téléphone valide"
+      "phoneInvalid": "Entrez un numéro de téléphone valide"
     }
   },
   "ApplicationSelector": {
@@ -48,7 +42,6 @@
     "moreVariable": "{count} variables de plus",
     "moreFixed": "{count} fixes de plus",
     "createApplicationError": "Échec de création de l'application:",
-    "selectProduct": "Sélectionner ce produit",
-    "creatingApplication": "Création de l'application..."
+    "selectProduct": "Sélectionner ce produit"
   }
 }

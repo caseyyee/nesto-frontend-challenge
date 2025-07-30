@@ -1,6 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Select } from "@/components/Select";
-import { FieldLabel } from "@/components/FieldLabel";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof Select> = {
   title: "Components/Select",

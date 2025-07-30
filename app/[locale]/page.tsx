@@ -1,6 +1,7 @@
 import { Heading } from "@/components/Heading";
 import { ProductList } from "@/components/ProductList";
 import ProductsLoadingSkeleton from "@/components/ProductsLoadingSkeleton";
+import { ErrorLayout } from "@/components/ErrorLayout";
 import { getBestProducts } from "@/lib/product-utils";
 import { fetchProductsServer } from "@/lib/server-api";
 import { getTranslations } from "next-intl/server";
@@ -30,13 +31,6 @@ async function ProductsServer() {
     return <ProductList variable={variable} fixed={fixed} />;
   } catch (error) {
     console.error("Error loading products:", error);
-    return (
-      <div className="text-red-600">
-        <p>Error loading products. Please try again later.</p>
-        <p className="text-sm">
-          {error instanceof Error ? error.message : "Unknown error"}
-        </p>
-      </div>
-    );
+    return <ErrorLayout title="Error loading products:" error={error} />;
   }
 }

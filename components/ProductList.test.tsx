@@ -214,24 +214,16 @@ describe("ProductList", () => {
       );
       fireEvent.click(selectButtons[0]);
 
-      // Should show loading text
-      await waitFor(() => {
-        expect(
-          screen.getAllByText(messages.ProductList.creatingApplication).length,
-        ).toBeGreaterThan(0);
-      });
-
       // All select buttons should be disabled during loading
-      const allButtons = screen.getAllByRole("button");
-      const disabledButtons = allButtons.filter(
-        (button) =>
-          button.textContent?.includes(
-            messages.ProductList.creatingApplication,
-          ) || button.textContent?.includes(messages.ProductList.selectProduct),
-      );
+      await waitFor(() => {
+        const allButtons = screen.getAllByRole("button");
+        const selectButtons = allButtons.filter((button) =>
+          button.textContent?.includes(messages.ProductList.selectProduct),
+        );
 
-      disabledButtons.forEach((button) => {
-        expect(button).toBeDisabled();
+        selectButtons.forEach((button) => {
+          expect(button).toBeDisabled();
+        });
       });
 
       // Resolve the promise to clean up

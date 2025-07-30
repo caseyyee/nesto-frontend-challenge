@@ -81,7 +81,7 @@ export function ProductCard({
           onClick={() => onSelectProduct(product.id)}
           disabled={isLoading}
         >
-          {isLoading ? t("creatingApplication") : t("selectProduct")}
+          {t("selectProduct")}
         </Button>
       )}
     </div>

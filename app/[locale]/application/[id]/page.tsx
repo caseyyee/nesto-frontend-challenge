@@ -1,7 +1,7 @@
 import { ApplicationForm } from "@/components/ApplicationForm";
 import { ApplicationSelector } from "@/components/ApplicationSelector";
-import { Heading } from "@/components/Heading";
 import { ProductCard } from "@/components/ProductCard";
+import { ErrorLayout } from "@/components/ErrorLayout";
 import {
   fetchApplicationServer,
   fetchApplicationsServer,
@@ -9,7 +9,6 @@ import {
 } from "@/lib/server-api";
 import { getTranslations } from "next-intl/server";
 import { BestProductCard } from "@/components/BestProductCard";
-import { Text } from "@/components/Text";
 
 interface ApplicationPageProps {
   params: Promise<{ id: string }>;
@@ -62,13 +61,6 @@ export default async function ApplicationPage({
     );
   } catch (error) {
     console.error("Failed to fetch application:", error);
-    return (
-      <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 text-center space-y-4 min-h-90 flex flex-col items-center justify-center">
-        <Heading level={2}>Error loading application:</Heading>
-        <Text size="xl">
-          {error instanceof Error ? error.message : "Unknown error"}
-        </Text>
-      </div>
-    );
+    return <ErrorLayout title="Error loading application:" error={error} />;
   }
 }

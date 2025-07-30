@@ -175,7 +175,7 @@ export function ApplicationForm({ initialApplication }: ApplicationFormProps) {
 
           <div className="flex justify-center mt-8">
             <Button type="submit" disabled={isPending || !isValid || !isDirty}>
-              {isPending ? t("saving") : t("saveButton")}
+              {t("saveButton")}
             </Button>
           </div>
 

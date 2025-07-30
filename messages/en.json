@@ -4,34 +4,28 @@
     "title": "Find the Best Mortgage Rates in Canada"
   },
   "ApplicationPage": {
-    "title": "Application",
-    "home": "Go to home page",
-    "errorLoading": "Error loading application:",
-    "unknownError": "Unknown error",
     "selectedProduct": "Selected Product"
   },
   "ApplicationForm": {
     "title": "Applicant Information",
-    "noDataProvided": "No application data provided.",
     "firstName": "First Name",
     "lastName": "Last Name",
     "email": "Email",
     "phone": "Phone",
-    "saving": "Saving...",
     "saveButton": "Save Application",
-    "successMessage": "Application saved!",
-    "errorMessage": "Failed to save. Please try again.",
-    "updateError": "Failed to update:",
+    "successMessage": "Application saved",
+    "errorMessage": "Failed to save",
+    "updateError": "Failed to update",
     "validation": {
       "firstNameRequired": "First name is required",
-      "firstNameMinLength": "First name must be at least 2 characters",
-      "firstNameMaxLength": "First name must be less than 50 characters",
+      "firstNameMinLength": "Must be at least 2 characters",
+      "firstNameMaxLength": "Must be less than 50 characters",
       "lastNameRequired": "Last name is required",
-      "lastNameMinLength": "Last name must be at least 2 characters",
-      "lastNameMaxLength": "Last name must be less than 50 characters",
-      "emailInvalid": "Please enter a valid email address",
+      "lastNameMinLength": "Must be at least 2 characters",
+      "lastNameMaxLength": "Must be less than 50 characters",
+      "emailInvalid": "Enter a valid email address",
       "phoneRequired": "Phone number is required",
-      "phoneInvalid": "Please enter a valid phone number"
+      "phoneInvalid": "Enter a valid phone number"
     }
   },
   "ApplicationSelector": {
@@ -48,7 +42,6 @@
     "moreVariable": "{count} more variable",
     "moreFixed": "{count} more fixed",
     "createApplicationError": "Failed to create application:",
-    "selectProduct": "Select this Product",
-    "creatingApplication": "Creating Application..."
+    "selectProduct": "Select this Product"
   }
 }
