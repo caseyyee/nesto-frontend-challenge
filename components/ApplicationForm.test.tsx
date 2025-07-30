@@ -140,7 +140,7 @@ describe("ApplicationForm", () => {
       const emailInput = screen.getByLabelText(messages.ApplicationForm.email);
       const phoneInput = screen.getByLabelText(messages.ApplicationForm.phone);
 
-      // Trigger validation by focusing and blurring fields
+      // Trigger validation by focusing and blurring fields (onTouched mode)
       await user.click(firstNameInput);
       await user.tab();
       await user.click(lastNameInput);
@@ -273,6 +273,7 @@ describe("ApplicationForm", () => {
         messages.ApplicationForm.firstName,
       );
 
+      // With onTouched mode, trigger validation by focusing and blurring
       await user.click(firstNameInput);
       await user.tab();
 
@@ -485,7 +486,7 @@ describe("ApplicationForm", () => {
   describe("Edge Cases", () => {
     it("handles application without applicants array", () => {
       const application = createMockApplication({
-        applicants: undefined as Application['applicants'],
+        applicants: undefined as Application["applicants"],
       });
 
       expect(() => {
@@ -518,7 +519,9 @@ describe("ApplicationForm", () => {
     });
 
     it("does not submit when application id is missing", async () => {
-      const application = createMockApplication({ id: undefined as Application['id'] });
+      const application = createMockApplication({
+        id: undefined as Application["id"],
+      });
       renderWithProviders(<ApplicationForm initialApplication={application} />);
 
       const firstNameInput = screen.getByLabelText(

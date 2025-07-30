@@ -60,28 +60,29 @@ export function ApplicationForm({ initialApplication }: ApplicationFormProps) {
     formState: { errors, isValid, isDirty },
   } = useForm<ApplicantFormData>({
     resolver: zodResolver(createApplicantFormSchema(t)),
-    mode: "onBlur",
+    mode: "onTouched",
     defaultValues: getDefaultValues(initialApplication),
   });
 
-  const { updateApplication, isPending, isError, isSuccess } = useUpdateApplication({
-    initialApplication,
-    onSuccess: (updatedApplication) => {
-      // Update form data with the response
-      if (updatedApplication.applicants?.[0]) {
-        const applicant = updatedApplication.applicants[0];
-        reset({
-          firstName: applicant.firstName || "",
-          lastName: applicant.lastName || "",
-          email: applicant.email || "",
-          phone: applicant.phone || "",
-        });
-      }
-    },
-    onError: (error) => {
-      console.error(t("updateError"), error);
-    },
-  });
+  const { updateApplication, isPending, isError, isSuccess } =
+    useUpdateApplication({
+      initialApplication,
+      onSuccess: (updatedApplication) => {
+        // Update form data with the response
+        if (updatedApplication.applicants?.[0]) {
+          const applicant = updatedApplication.applicants[0];
+          reset({
+            firstName: applicant.firstName || "",
+            lastName: applicant.lastName || "",
+            email: applicant.email || "",
+            phone: applicant.phone || "",
+          });
+        }
+      },
+      onError: (error) => {
+        console.error(t("updateError"), error);
+      },
+    });
 
   const onSubmit = (data: ApplicantFormData) => {
     const updatedApplicants = [
