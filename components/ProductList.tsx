@@ -21,6 +21,9 @@ interface ProductListProps {
 export function ProductList({ variable, fixed }: ProductListProps) {
   const [showMoreVariable, setShowMoreVariable] = useState(false);
   const [showMoreFixed, setShowMoreFixed] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState<number | null>(
+    null,
+  );
   const router = useRouter();
   const t = useTranslations("ProductList");
 
@@ -34,12 +37,14 @@ export function ProductList({ variable, fixed }: ProductListProps) {
     },
     onError: (error) => {
       console.error(t("createApplicationError"), error);
+      setSelectedProductId(null);
     },
   });
 
   const { isPending } = createApplicationMutation;
 
   const handleSelectProduct = (productId: number) => {
+    setSelectedProductId(productId);
     createApplicationMutation.mutate({ productId });
   };
 
@@ -55,7 +60,7 @@ export function ProductList({ variable, fixed }: ProductListProps) {
               variant="best"
               product={bestVariable}
               onSelectProduct={handleSelectProduct}
-              isLoading={isPending}
+              isLoading={isPending && selectedProductId === bestVariable.id}
             />
           </BestProductCard>
         )}
@@ -67,7 +72,7 @@ export function ProductList({ variable, fixed }: ProductListProps) {
                 key={product.id}
                 product={product}
                 onSelectProduct={handleSelectProduct}
-                isLoading={isPending}
+                isLoading={isPending && selectedProductId === product.id}
               />
             ))}
           </ProductListSection>
@@ -94,7 +99,7 @@ export function ProductList({ variable, fixed }: ProductListProps) {
               variant="best"
               product={bestFixed}
               onSelectProduct={handleSelectProduct}
-              isLoading={isPending}
+              isLoading={isPending && selectedProductId === bestFixed.id}
             />
           </BestProductCard>
         )}
@@ -106,7 +111,7 @@ export function ProductList({ variable, fixed }: ProductListProps) {
                 key={product.id}
                 product={product}
                 onSelectProduct={handleSelectProduct}
-                isLoading={isPending}
+                isLoading={isPending && selectedProductId === product.id}
               />
             ))}
           </ProductListSection>

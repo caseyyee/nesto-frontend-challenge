@@ -1,10 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import {
-  screen,
-  fireEvent,
-  waitFor,
-  cleanup,
-} from "@testing-library/react";
+import { screen, fireEvent, waitFor, cleanup } from "@testing-library/react";
 import { ProductList } from "./ProductList";
 import { mockProducts } from "@/test-utils/mocks/products";
 import type { Product } from "@/types/nesto";
@@ -26,7 +21,6 @@ vi.mock("@/lib/api", () => ({
     createApplication: vi.fn(),
   },
 }));
-
 
 describe("ProductList", () => {
   const variableProducts: Product[] = mockProducts.filter(
@@ -197,15 +191,19 @@ describe("ProductList", () => {
       );
       fireEvent.click(selectButtons[0]);
 
-      // All select buttons should be disabled during loading
+      // Only the clicked button should be disabled during loading
       await waitFor(() => {
         const allButtons = screen.getAllByRole("button");
         const selectButtons = allButtons.filter((button) =>
           button.textContent?.includes(messages.ProductList.selectProduct),
         );
 
-        selectButtons.forEach((button) => {
-          expect(button).toBeDisabled();
+        // The first button (that was clicked) should be disabled
+        expect(selectButtons[0]).toBeDisabled();
+
+        // Other select buttons should remain enabled
+        selectButtons.slice(1).forEach((button) => {
+          expect(button).not.toBeDisabled();
         });
       });
 
