@@ -73,7 +73,7 @@ export function ProductCard({
         )}
       </div>
 
-      <Text className="mt-1">{product.name}</Text>
+      <Text className="mt-1 text-center">{product.name}</Text>
 
       {onSelectProduct && (
         <Button
