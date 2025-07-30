@@ -1,15 +1,15 @@
 "use client";
 
-import { api } from "@/lib/api";
+import { useCreateApplication } from "@/hooks/useCreateApplication";
 import type { Product } from "@/types/nesto";
 import { ArrowRightIcon } from "@heroicons/react/16/solid";
 import { StarIcon } from "@heroicons/react/24/solid";
-import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { BestProductCard } from "./BestProductCard";
 import { Button } from "./Button";
+import { ErrorLayout } from "./ErrorLayout";
 import { ProductCard } from "./ProductCard";
 import { ProductListSection } from "./ProductListSection";
 
@@ -24,29 +24,34 @@ export function ProductList({ variable, fixed }: ProductListProps) {
   const [selectedProductId, setSelectedProductId] = useState<number | null>(
     null,
   );
+  const [error, setError] = useState<Error | null>(null);
   const router = useRouter();
   const t = useTranslations("ProductList");
 
   const [bestVariable, ...restVariable] = variable;
   const [bestFixed, ...restFixed] = fixed;
 
-  const createApplicationMutation = useMutation({
-    mutationFn: api.createApplication,
+  const { createApplication, isPending } = useCreateApplication({
     onSuccess: (application) => {
+      setError(null);
       router.push(`/application/${application.id}`);
     },
     onError: (error) => {
       console.error(t("createApplicationError"), error);
+      setError(error);
       setSelectedProductId(null);
     },
   });
 
-  const { isPending } = createApplicationMutation;
-
   const handleSelectProduct = (productId: number) => {
+    setError(null);
     setSelectedProductId(productId);
-    createApplicationMutation.mutate({ productId });
+    createApplication(productId);
   };
+
+  if (error) {
+    return <ErrorLayout title={t("createApplicationError")} error={error} />;
+  }
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2">

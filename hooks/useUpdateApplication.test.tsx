@@ -5,6 +5,7 @@ import { useUpdateApplication } from "./useUpdateApplication";
 import { api } from "@/lib/api";
 import { revalidateApplications } from "@/lib/actions";
 import { mockApplications } from "@/test-utils/mocks/applications";
+import { createWrapper } from "@/test-utils";
 import type { Application } from "@/types/nesto";
 import React from "react";
 
@@ -22,20 +23,6 @@ vi.mock("@/lib/actions", () => ({
 
 const mockUpdateApplication = vi.mocked(api.updateApplication);
 const mockRevalidateApplications = vi.mocked(revalidateApplications);
-
-// Test wrapper with React Query provider
-const createWrapper = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-
-  return ({ children }: { children: React.ReactNode }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
-};
 
 describe("useUpdateApplication", () => {
   const initialApplication = mockApplications[0];
