@@ -232,6 +232,13 @@ describe("ProductList", () => {
       );
       fireEvent.click(selectButtons[0]);
 
+      // Should show error message
+      await waitFor(() => {
+        expect(
+          screen.getByText(messages.ProductList.createApplicationError),
+        ).toBeInTheDocument();
+      });
+
       // Should log error
       await waitFor(() => {
         expect(consoleErrorSpy).toHaveBeenCalledWith(
