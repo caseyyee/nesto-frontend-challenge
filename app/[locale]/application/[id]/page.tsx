@@ -20,13 +20,9 @@ export default async function ApplicationPage({
   const t = await getTranslations("ApplicationPage");
   const { id: applicationId } = await params;
 
-  // Fetch all applications
-  const allApplications = await fetchApplicationsServer().catch((error) => {
-    console.error("Failed to fetch applications for selector:", error);
-    return [];
-  });
-
   try {
+    // Fetch all applications and specific application
+    const allApplications = await fetchApplicationsServer();
     const application = await fetchApplicationServer(applicationId);
 
     // Fetch product

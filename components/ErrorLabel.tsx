@@ -1,20 +1,20 @@
-import { ReactNode } from "react";
+import { ReactNode, HTMLAttributes } from "react";
 import { Text } from "./Text";
 
-interface ErrorLabelProps {
+interface ErrorLabelProps extends HTMLAttributes<HTMLParagraphElement> {
   error?: {
     message?: string;
   };
   children?: ReactNode;
 }
 
-export function ErrorLabel({ error, children }: ErrorLabelProps) {
+export function ErrorLabel({ error, children, ...props }: ErrorLabelProps) {
   if (!error?.message && !children) {
     return null;
   }
 
   return (
-    <Text size="sm" className="text-orange mt-2 ml-2 font-semibold">
+    <Text size="sm" className="text-orange mt-2 ml-2 font-semibold" {...props}>
       {error?.message || children}
     </Text>
   );

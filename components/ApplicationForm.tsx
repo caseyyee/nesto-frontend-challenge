@@ -137,7 +137,10 @@ export function ApplicationForm({ initialApplication }: ApplicationFormProps) {
               variant={errors.firstName ? "error" : "default"}
               {...register("firstName")}
             />
-            <ErrorLabel error={errors.firstName} />
+            <ErrorLabel
+              error={errors.firstName}
+              data-testid="firstName-error"
+            />
           </div>
 
           <div>
@@ -148,7 +151,7 @@ export function ApplicationForm({ initialApplication }: ApplicationFormProps) {
               variant={errors.lastName ? "error" : "default"}
               {...register("lastName")}
             />
-            <ErrorLabel error={errors.lastName} />
+            <ErrorLabel error={errors.lastName} data-testid="lastName-error" />
           </div>
 
           <div>
@@ -159,7 +162,7 @@ export function ApplicationForm({ initialApplication }: ApplicationFormProps) {
               variant={errors.email ? "error" : "default"}
               {...register("email")}
             />
-            <ErrorLabel error={errors.email} />
+            <ErrorLabel error={errors.email} data-testid="email-error" />
           </div>
 
           <div>
@@ -170,7 +173,7 @@ export function ApplicationForm({ initialApplication }: ApplicationFormProps) {
               variant={errors.phone ? "error" : "default"}
               {...register("phone")}
             />
-            <ErrorLabel error={errors.phone} />
+            <ErrorLabel error={errors.phone} data-testid="phone-error" />
           </div>
 
           <div className="flex justify-center mt-8">
@@ -179,20 +182,19 @@ export function ApplicationForm({ initialApplication }: ApplicationFormProps) {
             </Button>
           </div>
 
-          {isError ||
-            (isSuccess && (
-              <Text
-                size="lg"
-                className={clsx(
-                  isError && "text-orange",
-                  isSuccess && "text-grand-blue",
-                  "font-semibold text-center",
-                )}
-              >
-                {isError && t("errorMessage")}
-                {isSuccess && t("successMessage")}
-              </Text>
-            ))}
+          {(isError || isSuccess) && (
+            <Text
+              size="lg"
+              className={clsx(
+                isError && "text-orange",
+                isSuccess && "text-grand-blue",
+                "font-semibold text-center",
+              )}
+            >
+              {isError && t("errorMessage")}
+              {isSuccess && t("successMessage")}
+            </Text>
+          )}
         </form>
       </div>
     </div>

@@ -39,6 +39,7 @@ export function ProductCard({
 }: ProductCardProps) {
   const t = useTranslations("ProductList");
 
+  const buttonVariant = variant === "best" ? "primary" : "secondary";
   return (
     <div
       key={product.id}
@@ -77,7 +78,8 @@ export function ProductCard({
       {onSelectProduct && (
         <Button
           className="mt-5"
-          variant={variant === "best" ? "primary" : "secondary"}
+          variant={buttonVariant}
+          data-variant={buttonVariant}
           onClick={() => onSelectProduct(product.id)}
           disabled={isLoading}
         >

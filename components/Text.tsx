@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, HTMLAttributes } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const textStyles = cva("", {
@@ -23,7 +23,7 @@ const textStyles = cva("", {
   },
 });
 
-interface TextProps extends VariantProps<typeof textStyles> {
+interface TextProps extends VariantProps<typeof textStyles>, Omit<HTMLAttributes<HTMLElement>, 'className'> {
   children: ReactNode;
   as?: "p" | "span" | "div";
   className?: string;
@@ -34,9 +34,10 @@ export function Text({
   as: Component = "p",
   size,
   className,
+  ...props
 }: TextProps) {
   return (
-    <Component className={textStyles({ size, className })}>
+    <Component className={textStyles({ size, className })} {...props}>
       {children}
     </Component>
   );

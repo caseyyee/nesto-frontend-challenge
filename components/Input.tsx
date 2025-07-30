@@ -31,6 +31,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       <input
         ref={ref}
         className={clsx(inputStyles({ variant, size }), className)}
+        data-error={variant === "error" ? "true" : undefined}
         {...props}
       />
     );

@@ -1,17 +1,15 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import {
-  render,
   screen,
   fireEvent,
   waitFor,
   cleanup,
 } from "@testing-library/react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ProductList } from "./ProductList";
 import { mockProducts } from "@/test-utils/mocks/products";
 import type { Product } from "@/types/nesto";
 import { api } from "@/lib/api";
-import { TestI18nProvider } from "@/test-utils";
+import { renderWithProviders } from "@/test-utils";
 import messages from "@/messages/en.json";
 
 // Mock Next.js router
@@ -29,21 +27,6 @@ vi.mock("@/lib/api", () => ({
   },
 }));
 
-// Test wrapper with React Query provider and i18n
-const renderWithWrapper = (ui: React.ReactElement) => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-
-  return render(
-    <TestI18nProvider>
-      <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>
-    </TestI18nProvider>,
-  );
-};
 
 describe("ProductList", () => {
   const variableProducts: Product[] = mockProducts.filter(
@@ -65,7 +48,7 @@ describe("ProductList", () => {
 
   describe("Rendering", () => {
     it("renders best variable and fixed products", () => {
-      renderWithWrapper(
+      renderWithProviders(
         <ProductList variable={variableProducts} fixed={fixedProducts} />,
       );
 
@@ -84,7 +67,7 @@ describe("ProductList", () => {
     });
 
     it("handles empty product lists gracefully", () => {
-      renderWithWrapper(<ProductList variable={[]} fixed={[]} />);
+      renderWithProviders(<ProductList variable={[]} fixed={[]} />);
 
       // Should not show best product cards when no products
       expect(
@@ -110,7 +93,7 @@ describe("ProductList", () => {
 
   describe("Show More Functionality", () => {
     it("shows and expands variable products", async () => {
-      renderWithWrapper(
+      renderWithProviders(
         <ProductList variable={variableProducts} fixed={fixedProducts} />,
       );
 
@@ -135,7 +118,7 @@ describe("ProductList", () => {
     });
 
     it("shows and expands fixed products", async () => {
-      renderWithWrapper(
+      renderWithProviders(
         <ProductList variable={variableProducts} fixed={fixedProducts} />,
       );
 
@@ -170,7 +153,7 @@ describe("ProductList", () => {
       };
       mockCreateApplication.mockResolvedValue(mockApplication);
 
-      renderWithWrapper(
+      renderWithProviders(
         <ProductList variable={variableProducts} fixed={fixedProducts} />,
       );
 
@@ -204,7 +187,7 @@ describe("ProductList", () => {
         pendingPromise as ReturnType<typeof api.createApplication>,
       );
 
-      renderWithWrapper(
+      renderWithProviders(
         <ProductList variable={variableProducts} fixed={fixedProducts} />,
       );
 
@@ -241,7 +224,7 @@ describe("ProductList", () => {
         .mockImplementation(() => {});
       mockCreateApplication.mockRejectedValue(new Error("API Error"));
 
-      renderWithWrapper(
+      renderWithProviders(
         <ProductList variable={variableProducts} fixed={fixedProducts} />,
       );
 
