@@ -38,6 +38,7 @@ export const Default: Story = {
       <ProductCard
         product={mockProduct}
         onSelectProduct={(id) => console.log("Selected product:", id)}
+        variant="best"
       />
     ),
   },
@@ -56,6 +57,7 @@ export const WithStartIcon: Story = {
           type: "FIXED",
         }}
         onSelectProduct={(id) => console.log("Selected product:", id)}
+        variant="best"
       />
     ),
   },
@@ -74,6 +76,7 @@ export const WithEndIcon: Story = {
           name: "Premium Rate",
         }}
         onSelectProduct={(id) => console.log("Selected product:", id)}
+        variant="best"
       />
     ),
   },
